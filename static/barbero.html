@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Barbero | Barbería El Calvo</title>
+    <link rel="icon" type="image/svg+xml" href="img/logo.jpg">
+    <link rel="stylesheet" href="css/barbero/nav.css">
+    <link rel="stylesheet" href="css/barbero/calendario.css">
+    <link rel="stylesheet" href="css/barbero/productos.css">
+    <link rel="stylesheet" href="css/barbero/footer.css">
+    <link rel="stylesheet" href="css/barbero/solicitud-carrito.css">
+    <link rel="stylesheet" href="css/modal-error.css">
+    <link rel="stylesheet" href="css/barbero/solicitudPendientes.css">
+    <link rel="stylesheet" href="css/barbero/botonesBarberoMovil.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <style>
+        .oculto-pagina {
+            display: none !important;
+        }
+    </style>
+
+    <script defer src="js/permisosRoles.js"> </script>
+</head>
+
+<body>
+
+    <!-- CONTENIDO OCULTO HASTA VALIDAR -->
+    <div id="contenido-pagina" class="oculto-pagina">
+
+        <!-- ===== NAVBAR ===== -->
+        <header class="navbar">
+            <div class="logo-container">
+                <a href="/barbero.html" class="logo-container">
+                    <img src="img/logo.jpg" alt="Logo El Calvo" class="logo-img" />
+                    <div class="logo-text">EL CALVO</div>
+                </a>
+            </div>
+
+            <!-- Menú desplegable (para móvil) -->
+            <nav class="nav-links" id="nav-links">
+                <a href="#agenda" class="active">Agenda</a>
+                <a href="#productos">Solicitar Productos</a>
+                <a href="#solicitudes-barbero">Solicitudes</a>
+
+                <!-- Buscador dentro del menú móvil -->
+                <div class="search-container mobile-search">
+                    <input type="text" placeholder="Buscar" class="search" />
+                    <i class="fas fa-search search-icon"></i>
+
+                    <ul class="dropdown-sugerencias sugerencias-mobile"></ul>
+                </div>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Buscador solo visible en escritorio -->
+                <div class="search-container desktop-search">
+                    <input type="text" placeholder="Buscar" class="search" />
+                    <i class="fas fa-search search-icon"></i>
+
+                    <ul class="dropdown-sugerencias sugerencias-desktop"></ul>
+                </div>
+
+                <a id="btn-solicitud-panel" class="btn-cart position-relative" aria-label="Ver solicitud">
+                    <i class="fas fa-box-open fs-4"></i>
+                    <span id="solicitud-contador">0</span>
+                </a>
+
+                <span id="saludoBarbero" class="saludo-barbero">Hola, Barbero</span>
+                <button id="btnCerrarSesion" class="btn-cerrar">Cerrar Sesión</button>
+
+                <!-- Botón Hamburguesa -->
+                <button class="hamburger" id="hamburger" aria-label="Menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- ===== CONTENIDO PRINCIPAL ===== -->
+        <main class="main-barbero">
+
+            <h2 class="main-calendar-title">Agenda de Citas</h2>
+
+            <section id="agenda" class="calendar-section">
+                <div class="calendar-header">
+                    <h2 id="tituloSemana">Semana del 0 al 0</h2>
+
+                    <div class="calendar-controls">
+                        <button id="btnMes">Mes</button>
+                        <button id="btnSemana" class="active">Semana</button>
+                        <button id="btnHoy">Hoy</button>
+
+                        <div class="calendar-navigation">
+                            <button id="prevSemana"><i class="fas fa-chevron-left"></i></button>
+                            <button id="nextSemana"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="calendar" class="calendar-grid week"></div>
+            </section>
+
+            <!-- ===== Modal Detalle de Cita ===== -->
+            <div id="modalCita" class="modal-cita-overlay">
+                <div class="modal-cita">
+                    <button class="modal-cita-close" id="cerrarModal"><i class="fas fa-times"></i></button>
+                    <h3>Detalle de Cita</h3>
+
+                    <div class="modal-info">
+                        <p><strong>ID Usuario:</strong> <span id="detalleIdUsuario"></span></p>
+                        <p><strong>Nombre:</strong> <span id="detalleNombre"></span></p>
+                        <p><strong>Servicio:</strong> <span id="detalleServicio"></span></p>
+                        <p><strong>Fecha:</strong> <span id="detalleFecha"></span></p>
+                        <p><strong>Hora Inicio:</strong> <span id="detalleHora"></span></p>
+                        <p><strong>Hora Fin:</strong> <span id="detalleHoraFin"></span></p>
+
+                        <p id="detallePrecioTexto" style="display: none;">
+                            <strong>Precio:</strong> S/. <span id="detallePrecio"></span>
+                        </p>
+                    </div>
+
+                    <div id="campoPrecio" style="display:none;" class="campo-precio">
+                        <label for="precioExtra"><strong>Precio:</strong></label>
+                        <div class="precio-input-container">
+                            <input type="number" id="precioExtra" min="0" step="0.01"
+                                placeholder="Ingrese el precio del servicio extra" />
+                            <button id="btnSubirPrecio" class="btn-check">✔</button>
+                            <button id="btnEditarPrecio" class="btn-edit" style="display:none;">✎</button>
+                        </div>
+                    </div>
+
+                    <div id="botonesModal" class="modal-buttons"></div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN SOLICITUD DE PRODUCTOS -->
+            <section id="productos" class="solicitud-section">
+                <div class="solicitud-header">
+                    <h2>Solicitud de Productos</h2>
+                    <p>Encuentra los mejores productos para tu estilo y solicita los que necesites.</p>
+
+                    <div class="solicitud-filtros" role="tablist" aria-label="Filtros solicitud productos">
+                        <button class="solicitud-filtro-btn active" data-categoria="todos">Todos</button>
+                        <button class="solicitud-filtro-btn" data-categoria="cabello">Cabello</button>
+                        <button class="solicitud-filtro-btn" data-categoria="barba">Barba</button>
+                        <button class="solicitud-filtro-btn" data-categoria="cuidado personal">Cuidado Personal</button>
+                        <button class="solicitud-filtro-btn" data-categoria="suministros Barbería">Suministros
+                            Barbería</button>
+                    </div>
+                </div>
+
+                <div class="solicitud-carrusel-container">
+                    <button class="solicitud-carrusel-btn prev" aria-label="Anterior" type="button">❮</button>
+
+                    <div class="solicitud-wrapper">
+                        <div class="solicitud-productos-container" id="solicitud-productos-container">
+                            <!-- Productos cargados por JS -->
+
+                        </div>
+                    </div>
+
+                    <button class="solicitud-carrusel-btn next" aria-label="Siguiente" type="button">❯</button>
+                </div>
+
+                <div class="solicitud-paginacion" id="solicitud-paginacion"></div>
+            </section>
+
+            <!-- ===== PANEL DE SOLICITUD ===== -->
+            <div id="solicitud-panel" class="solicitud-panel">
+                <div class="solicitud-header-panel">
+                    <h2>Tu Solicitud</h2>
+                    <button id="cerrar-solicitud" class="cerrar-btn">&times;</button>
+                </div>
+
+                <div class="linea-naranja"></div>
+
+                <ul id="solicitud-lista" class="solicitud-lista"></ul>
+
+                <div class="linea-naranja"></div>
+
+                <div class="solicitud-footer">
+                    <button id="enviar-solicitud" class="continuar-btn">Enviar Solicitud</button>
+                </div>
+            </div>
+
+            <!-- SECCIÓN SOLICITUDES -->
+            <section id="solicitudes-barbero" class="solicitudes-section">
+                <div class="solicitudes-header">
+                    <h2>Mis Solicitudes</h2>
+                    <p>Revisa el estado de tus solicitudes de productos.</p>
+                </div>
+
+                <!-- Contenedores separados -->
+                <div class="solicitudes-lista">
+                    <h3 class="solicitud-subtitulo">Pendientes</h3>
+                    <div id="solicitudes-pendientes" class="solicitudes-container"></div>
+
+                    <h3 class="solicitud-subtitulo">Finalizadas</h3>
+                    <div id="solicitudes-finalizadas" class="solicitudes-container"></div>
+                </div>
+            </section>
+
+            <div id="modalSolicitud" class="modal-solicitud-overlay">
+                <div class="modal-solicitud">
+                    <button class="modal-solicitud-close" id="cerrarModalSolicitud">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <h3>Detalle de Solicitud</h3>
+                    <div class="modal-solicitud-info">
+                        <p><strong>ID Solicitud:</strong> <span id="detalleIdSolicitud"></span></p>
+                        <p><strong>Estado:</strong> <span id="detalleEstadoSolicitud"></span></p>
+                        <p><strong>Fecha:</strong> <span id="detalleFechaSolicitud"></span></p>
+                        <h4>Productos Solicitados:</h4>
+                        <ul id="detalleProductosSolicitud" class="detalle-solicitud-productos-lista"></ul>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- FOOTER PANEL BARBERO -->
+        <footer class="footer-panel">
+            <div class="footer-panel-container">
+                <div class="footer-panel-brand">
+                    <h2>El Calvo</h2>
+                    <span class="footer-panel-tagline">Panel del Barbero</span>
+                </div>
+
+                <div class="footer-panel-links">
+                    <a href="#agenda">Agenda</a>
+                    <a href="#productos">Productos</a>
+                    <a href="#solicitudes-barbero">Solicitud</a>
+                </div>
+
+                <div class="footer-panel-social">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-panel-bottom">
+                <p>© 2025 <span>Barbería El Calvo</span> — Panel Interno</p>
+            </div>
+        </footer>
+
+        <div id="toast-container"></div>
+
+    </div> <!-- Cierre de CONTENIDO OCULTO HASTA VALIDAR -->
+
+    <script src="js/modal-error.js"></script>
+    <script src="js/barbero/calendarioBarbero.js"></script>
+    <script src="js/barbero/productoBarbero.js"></script>
+    <script src="js/barbero/carritoBarbero.js"></script>
+    <script src="js/barbero/btnHamburger.js"></script>
+    <script src="js/barbero/autenticacion.js"></script>
+    <script src="js/barbero/solicitudesBarbero.js"></script>
+
+    <div id="error-acceso" style="
+    display:none;
+    position:fixed; inset:0; background:rgb(14, 14, 14);
+    flex-direction:column; justify-content:center; align-items:center;
+    font-family:sans-serif; z-index:99999; text-align:center; padding:20px;">
+
+
+        <img src="img/error.png" alt="error" style="width:520px; opacity:0.7; margin-bottom:20px;">
+
+        <h1 style="font-size:40px; margin-bottom:10px;">Acceso denegado</h1>
+        <p id="error-acceso-mensaje" style="font-size:18px; color:#cac9c9;"></p>
+
+        <button id="error-acceso-btn"
+            style="margin-top:25px; padding:12px 25px; border:none; background:#ff9f1c; color:#fff; cursor:pointer; border-radius:6px;">
+            Volver al inicio
+        </button>
+    </div>
+
+
+    <!-- ===== BOTTOM NAV MÓVIL ===== -->
+    <nav class="bottom-nav-barbero">
+        <a href="#agenda" class="nav-item"><i class="fas fa-calendar"></i><span>Agenda</span></a>
+        <a href="#productos" class="nav-item"><i class="fas fa-box-open"></i><span>Productos</span></a>
+        <a href="#solicitudes-barbero" class="nav-item"><i class="fas fa-list"></i><span>Solicitudes</span></a>
+    </nav>
+
+</body>
+
+</html>

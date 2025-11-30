@@ -1,0 +1,261 @@
+.solicitudes-section {
+  margin-top: 60px;
+  padding: 40px 20px;
+  background: #111;
+  border-radius: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.solicitudes-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.solicitudes-header h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #ff7b00;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.solicitudes-header p {
+  color: #ccc;
+  font-size: 1rem;
+}
+
+.solicitud-subtitulo {
+  margin-top: 20px;
+  font-weight: 600;
+  color: #00ffcc;
+  font-size: 1.2rem;
+}
+
+.solicitudes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* === TARJETAS === */
+.solicitud-card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  flex: 1 1 240px;
+  border: 1px solid #222;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+
+.solicitud-card:hover {
+  transform: translateY(-4px);
+  border-color: #ff9800;
+  box-shadow: 0 6px 14px rgba(255, 152, 0, 0.4);
+}
+
+.solicitud-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.solicitud-id {
+  font-weight: 600;
+  color: #fff;
+}
+
+.solicitud-estado {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.solicitud-fecha {
+  color: #bbb;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.modal-solicitud-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(3px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-solicitud-overlay.activo {
+  display: flex;
+}
+
+.modal-solicitud {
+  background: linear-gradient(135deg,
+      rgba(231, 178, 108, 0.98),
+      rgba(255, 220, 160, 0.98));
+  padding: 2.2rem 1.8rem;
+  border-radius: 18px;
+  width: 420px;
+  max-width: 95%;
+  position: relative;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  transform: translateY(-25px);
+  opacity: 0;
+  animation: slideUp 0.4s ease forwards;
+  font-family: "Poppins", sans-serif;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(5px);
+  text-align: center;
+}
+
+.modal-solicitud::before {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 5px;
+  background: linear-gradient(to right, #000, #e7b26c);
+  border-radius: 10px;
+  margin: 0 auto 1rem;
+}
+
+.modal-solicitud h3 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2b1e11;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.modal-solicitud-info {
+  margin-bottom: 1.4rem;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.3),
+    inset 0 -2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.modal-solicitud-info p {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: #222;
+}
+
+.modal-solicitud-info strong {
+  color: #000;
+  font-weight: 700;
+}
+
+.modal-solicitud-info h4 {
+  color: #000;
+  font-weight: 700;
+}
+
+.modal-solicitud-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: #fff;
+  border: none;
+  font-size: 1.3rem;
+  color: #000;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.modal-solicitud-close:hover {
+  background: #e7b26c;
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.detalle-solicitud-productos-lista {
+  margin-top: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+.detalle-solicitud-productos-lista li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.detalle-solicitud-productos-lista li:hover {
+  background: rgba(231, 178, 108, 0.2);
+  transform: translateX(3px);
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .modal-solicitud {
+    width: 90%;
+    padding: 1.6rem;
+  }
+
+  .modal-solicitud h3 {
+    font-size: 1.3rem;
+  }
+
+  .detalle-solicitud-productos-lista li {
+    font-size: 0.9rem;
+  }
+
+  .solicitudes-section {
+    padding: 25px 15px;
+  }
+
+  .solicitud-card {
+    flex: 1 1 100%;
+  }
+
+}

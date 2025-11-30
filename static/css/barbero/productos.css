@@ -1,0 +1,279 @@
+/* ===== SECCIÓN SOLICITUD DE PRODUCTOS ===== */
+.solicitud-section {
+  text-align: center;
+  padding: 70px 20px;
+  background: url('../img/tienda.jpg') no-repeat center center/cover;
+  position: relative;
+  color: #fff;
+}
+
+.solicitud-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+
+.solicitud-section * {
+  position: relative;
+  z-index: 1;
+}
+
+.solicitud-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  color: #00ffcc;
+  margin-bottom: 8px;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.6);
+}
+
+.solicitud-header p {
+  font-family: Montserrat, sans-serif;
+  color: #ddd;
+  margin-bottom: 30px;
+}
+
+/* ===== FILTROS ===== */
+.solicitud-filtros {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.solicitud-filtro-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  padding-bottom: 6px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.solicitud-filtro-btn::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00ffcc, #00cc88);
+  border-radius: 4px;
+  transition: width .3s ease;
+}
+
+.solicitud-filtro-btn.active::after,
+.solicitud-filtro-btn:hover::after {
+  width: 100%;
+}
+
+.solicitud-filtro-btn:hover {
+  color: #00ffcc;
+  transform: scale(1.05);
+}
+
+/* ===== CARRUSEL ===== */
+.solicitud-carrusel-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+
+.solicitud-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.solicitud-productos-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(260px, auto);
+  gap: 24px;
+  transition: all 0.5s ease;
+  margin: 20px 0;
+}
+
+/* ===== CARD PRODUCTO ===== */
+.solicitud-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.solicitud-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+}
+
+.solicitud-thumb {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.solicitud-thumb img {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 10px;
+  transition: transform 0.4s ease;
+}
+
+.solicitud-card:hover .solicitud-thumb img {
+  transform: scale(1.05);
+}
+
+.solicitud-card h3 {
+  font-family: 'Playfair Display', serif;
+  color: #00ffcc;
+  font-size: 1.1rem;
+  margin: 10px 0 5px;
+}
+
+.solicitud-card p {
+  color: #ddd;
+  margin: 6px 0 12px;
+  font-size: .95rem;
+}
+
+.solicitud-btn-agregar {
+  background: linear-gradient(135deg, #00ffcc, #00cc88);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #000;
+  font-family: Montserrat, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.solicitud-btn-agregar:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+}
+
+/* ===== FLECHAS ===== */
+.solicitud-carrusel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(0, 255, 204, 0.6);
+  color: #00ffcc;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.solicitud-carrusel-btn:hover {
+  background: rgba(0, 255, 204, 0.15);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.solicitud-carrusel-btn.prev {
+  left: 8px;
+}
+
+.solicitud-carrusel-btn.next {
+  right: 8px;
+}
+
+.solicitud-carrusel-btn:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ===== PAGINACIÓN ===== */
+.solicitud-paginacion {
+  color: #bfbfbf;
+  font-family: Montserrat, sans-serif;
+  font-size: 1rem;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .solicitud-productos-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .solicitud-productos-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .solicitud-productos-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .solicitud-card {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .solicitud-thumb img {
+    max-height: 150px;
+  }
+
+  .solicitud-carrusel-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+  }
+}
+
+
+.solicitud-card.resaltado {
+  border: 2px solid #ff9f43;
+  box-shadow: 0 0 20px rgba(255, 159, 67, 0.7), 
+              0 0 35px rgba(255, 159, 67, 0.4);
+  transform: translateY(-6px) scale(1.04);
+  transition: all 0.3s ease;
+}
+
+@keyframes resaltarBarberoPulse {
+  0% {
+    box-shadow: 0 0 18px rgba(255, 159, 67, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(255, 159, 67, 0.85);
+  }
+  100% {
+    box-shadow: 0 0 18px rgba(255, 159, 67, 0.6);
+  }
+}
+
+.solicitud-card.resaltado {
+  animation: resaltarBarberoPulse 1.6s ease-in-out infinite;
+}

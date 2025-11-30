@@ -1,0 +1,141 @@
+section.seccion:not(.active) {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+section.seccion.active {
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  height: auto;
+  pointer-events: auto;
+}
+
+section.hero-admin.active {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-admin {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  padding: 70px 90px;
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, #0e0e0e 0%, #1b1b1b 100%);
+  border-radius: 16px;
+  color: #fff;
+  box-shadow: 0 8px 25px rgba(255, 165, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-admin::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(255, 154, 0, 0.15) 0%, transparent 70%);
+  filter: blur(20px);
+  z-index: 0;
+}
+
+/* ==== CONTENIDO ==== */
+.hero-admin .hero-content {
+  flex: 1 1 55%;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-admin .hero-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ff9a00;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.hero-admin .hero-content p {
+  color: #ddd;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 25px;
+  text-align: justify;
+}
+
+.hero-admin .hero-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+.hero-admin .hero-content li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  color: #ccc;
+  transition: 0.3s ease;
+}
+
+.hero-admin .hero-content li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ff9a00;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.hero-admin .hero-img {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-admin .hero-img img {
+  width: 90%;
+  max-width: 420px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(255, 154, 0, 0.2);
+  transition: all 0.4s ease;
+  object-fit: cover;
+}
+
+.hero-admin .hero-img img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 35px rgba(255, 154, 0, 0.4);
+  cursor: pointer;
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 950px) {
+  .hero-admin {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 30px;
+  }
+
+  .hero-admin .hero-content {
+    flex: none;
+    max-width: 100%;
+  }
+
+  .hero-admin .hero-img {
+    flex: none;
+    max-width: 80%;
+    margin-top: 25px;
+  }
+}

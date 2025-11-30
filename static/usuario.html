@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Cliente | Barbería</title>
+    <link rel="icon" type="image/svg+xml" href="img/logo.jpg">
+    <link rel="stylesheet" href="css/usuarioHtml.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        .oculto-pagina {
+            display: none !important;
+        }
+    </style>
+    
+    <script defer src="js/permisosRoles.js"> </script>
+</head>
+
+<body>
+    
+    <!-- CONTENIDO OCULTO HASTA VALIDAR -->
+    <div id="contenido-pagina" class="oculto-pagina">
+
+        <header class="header">
+            <div class="header-left">
+                <img src="img/logo.jpg" alt="Logo" class="logo">
+                <h1 class="nombre">Barbería El Calvo</h1>
+            </div>
+            <a href="index.html" class="btn-back">
+                <i class="ri-arrow-left-line"></i> Inicio
+            </a>
+        </header>
+
+        <main class="main">
+            <aside class="sidebar">
+                <button class="tab-btn active" data-tab="citas">
+                    <i class="ri-calendar-line"></i>
+                    <span>Citas</span>
+                </button>
+                <button class="tab-btn" data-tab="compras">
+                    <i class="ri-shopping-bag-3-line"></i>
+                    <span>Compras</span>
+                </button>
+                <button class="tab-btn" data-tab="perfil">
+                    <i class="ri-user-line"></i>
+                    <span>Perfil</span>
+                </button>
+            </aside>
+
+            <section class="content">
+                <!-- ========== Citas ========== -->
+                <div class="tab-content active" id="citas">
+                    <h2>Citas en curso</h2>
+                    <div id="citas-activas">
+                        <!-- Aquí se insertarán dinámicamente las citas activas desde JS -->
+                    </div>
+
+                    <h2>Historial de Citas</h2>
+                    <div id="historial-citas">
+                        <!-- Aquí se insertarán dinámicamente las citas finalizadas desde JS -->
+                    </div>
+                </div>
+                <!-- ========== Compras ========== -->
+                <div class="tab-content" id="compras">
+                    <h2>Compras pendientes</h2>
+                    <div id="compras-pendientes">
+                        <!-- Aquí se insertarán dinámicamente las compras pendientes desde JS -->
+                    </div>
+
+                    <h2>Historial de Compras</h2>
+                    <div id="compras-finalizadas">
+                        <!-- Aquí se insertarán dinámicamente las compras finalizadas desde JS -->
+                    </div>
+                </div>
+
+                <!-- ========== Perfil ========== -->
+
+                <div class="tab-content" id="perfil">
+                    <h2>Información del Usuario</h2>
+                    <div class="card" id="perfil-info">
+                        <!-- Los datos del usuario se insertarán aquí desde JavaScript -->
+                    </div>
+
+                    <!-- 
+                        FUTURO: Aquí añadiremos el botón "Editar perfil" 
+                        para que el usuario pueda actualizar su información, subir una imagen, 
+                        agregar una descripción, etc.
+                        <button class="edit-btn">Editar perfil</button>
+                      -->
+                </div>
+
+            </section>
+        </main>
+
+    </div> <!-- Cierre de CONTENIDO OCULTO HASTA VALIDAR -->
+
+    <script src="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.js"></script>
+    <script src="js/usuario.js"></script>
+    <script src="js/historialVenta.js"></script>
+
+    <div id="error-acceso" style="
+    display:none;
+    position:fixed; inset:0; background:rgb(14, 14, 14);
+    flex-direction:column; justify-content:center; align-items:center;
+    font-family:sans-serif; z-index:99999; text-align:center; padding:20px;">
+
+        <img src="img/error.png" alt="error" style="width:520px; opacity:0.7; margin-bottom:20px;">
+
+        <h1 style="font-size:40px; margin-bottom:10px;">Acceso denegado</h1>
+        <p id="error-acceso-mensaje" style="font-size:18px; color:#f9f9f9;"></p>
+
+        <button id="error-acceso-btn"
+            style="margin-top:25px; padding:12px 25px; border:none; background:#ff9f1c; color:#fff; cursor:pointer; border-radius:6px;">
+            Volver al inicio
+        </button>
+    </div>
+
+</body>
+
+</html>

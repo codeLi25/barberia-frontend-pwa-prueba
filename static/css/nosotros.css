@@ -1,0 +1,248 @@
+:root {
+  --font-title: 'Bebas Neue', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --bg: #111;
+  --card: #1a1a1b;
+  --accent: #ff9b2b;
+  --muted: #c9c9c9;
+  --glass: rgba(255, 255, 255, 0.08);
+}
+
+body {
+  font-family: var(--font-body);
+  color: #fff;
+  background: var(--bg);
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h2 {
+  font-size: 2.6rem;
+  margin-bottom: 14px;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+
+.nosotros {
+  background: var(--bg);
+  color: #fff;
+  padding: 70px 40px;
+  text-align: center;
+}
+
+.nosotros-title {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.nosotros-desc {
+  font-size: 1.2rem;
+  color: var(--muted);
+  margin-bottom: 50px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.nosotros-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.carousel-container {
+  position: relative;
+  flex: 1;
+  max-width: 520px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--card);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+.carousel {
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.22, 0.98, 0.45, 1);
+}
+
+.carousel-item {
+  min-width: 100%;
+  text-align: center;
+  background: var(--card);
+  border-radius: 16px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 15px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.carousel-item img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 26px rgba(255, 155, 43, 0.25);
+}
+
+.carousel-item h3 {
+  font-size: 1.4rem;
+  color: var(--accent);
+  margin-bottom: 5px;
+}
+
+.carousel-item p {
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  display: grid;
+  place-items: center;
+  background: var(--glass);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  transition: all 0.25s ease;
+  z-index: 10;
+}
+
+.carousel-btn:hover {
+  background: linear-gradient(180deg, rgba(255, 155, 43, 0.95), rgba(255, 130, 20, 0.95));
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 8px 30px rgba(255, 155, 43, 0.25);
+  color: #111;
+}
+
+.carousel-btn.prev {
+  left: 10px;
+}
+
+.carousel-btn.next {
+  right: 10px;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.carousel-indicators .dot {
+  width: 34px;
+  height: 8px;
+  border-radius: 999px;
+  background: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.carousel-indicators .dot.active {
+  background: var(--accent);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.nosotros-texto {
+  flex: 1;
+  max-width: 600px;
+}
+
+.nosotros-texto p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.nosotros-texto ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nosotros-texto ul li {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.nosotros-texto ul li strong {
+  color: var(--accent);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .nosotros-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nosotros-texto {
+    max-width: 100%;
+  }
+
+  .carousel-container {
+    max-width: 100%;
+  }
+
+  .carousel-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+
+  .carousel-item img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel-item img {
+    height: 260px;
+  }
+}

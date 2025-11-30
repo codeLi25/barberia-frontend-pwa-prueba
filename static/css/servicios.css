@@ -1,0 +1,338 @@
+  :root {
+    --bg: #0f0f10;
+    --card: #171718;
+    --accent: #ff9b2b;
+    --muted: #bfbfbf;
+    --glass: rgba(255, 255, 255, 0.06);
+  }
+
+  /* SECCIÓN SERVICIOS */
+  .servicios {
+    background: var(--bg);
+    color: #fff;
+    padding: 70px 20px;
+    text-align: center;
+
+  }
+
+  .servicios-title {
+    font-size: 2.4rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .servicios-desc {
+    color: var(--muted);
+    max-width: 780px;
+    margin: 0 auto 30px;
+    line-height: 1.5;
+  }
+
+  /* FILTROS */
+  .servicios-filtros {
+    margin-bottom: 28px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .filtro-btn {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    padding: 10px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    font-weight: 600;
+  }
+
+  .filtro-btn[aria-pressed="true"],
+  .filtro-btn.active {
+    background: var(--accent);
+    color: #111;
+    box-shadow: 0 6px 18px rgba(255, 155, 43, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* CARRUSEL */
+  .carrusel-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 8px 36px;
+    box-sizing: border-box;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.22, 0.98, 0.45, 1);
+  }
+
+  .page {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 12px;
+  }
+
+  /* GRID de tarjetas */
+  .page-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: auto;
+    align-items: stretch; 
+  }
+
+  /* TARJETA */
+.servicio-card {
+  background: var(--card);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 0 6px 18px rgba(239, 239, 239, 0.45);
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  padding: 12px;
+  width: 100%;
+  min-height: 420px; 
+  max-width: 320px; 
+}
+
+  .servicio-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(212, 175, 55, 0.9);
+  }
+
+.servicio-card .thumb {
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 10px;
+  background: #b8b6b6;
+  margin-bottom: 12px;
+}
+  .servicio-info {
+    padding: 14px 16px 18px;
+    text-align: left;
+  }
+
+  .servicio-info h3 {
+    color: var(--accent);
+    margin: 0 0 6px;
+    font-size: 1.05rem;
+  }
+
+  .servicio-info p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  /* BOTONES DE CARRUSEL */
+  .carrusel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    display: inline-grid;
+    place-items: center;
+    background: var(--glass);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 22px rgba(2, 6, 23, 0.6);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease, opacity 0.18s;
+    z-index: 20;
+  }
+
+  .carrusel-btn svg {
+    stroke: #111;
+    color: #111;
+  }
+
+  .carrusel-btn:hover {
+    transform: translateY(-50%) scale(1.05);
+    background: linear-gradient(180deg, rgba(255, 155, 43, 0.95), rgba(255, 130, 20, 0.95));
+  }
+
+  .carrusel-btn.prev {
+    left: 8px;
+  }
+
+  .carrusel-btn.next {
+    right: 8px;
+  }
+
+  /* PUNTOS DE NAVEGACIÓN */
+  .carousel-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  .carousel-dots button {
+    width: 36px;
+    height: 8px;
+    border-radius: 999px;
+    border: none;
+    background: #222;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .carousel-dots button.active {
+    background: var(--accent);
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  /* MODAL */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.66);
+    align-items: center;
+    justify-content: center;
+    z-index: 120;
+    padding: 28px;
+  }
+
+  .modal[aria-hidden="false"] {
+    display: flex;
+  }
+
+  .modal-content {
+    width: min(980px, 96%);
+    background: #0f0f10;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    position: relative;
+  }
+
+  .modal-body {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+
+  .modal-body img {
+    width: 48%;
+    border-radius: 10px;
+    height: 380px;
+    object-fit: cover;
+  }
+
+  .modal-info {
+    width: 52%;
+    text-align: left;
+  }
+
+  .modal-info h3 {
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+
+  .modal-info p {
+    color: var(--muted);
+    margin: 0 0 12px;
+    line-height: 1.5;
+  }
+
+  .modal-meta {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px;
+    color: var(--muted);
+  }
+
+  .modal-meta li {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-reservar {
+    background: var(--accent);
+    color: #111;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 28px rgba(255, 155, 43, 0.12);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .modal-close {
+    position: absolute;
+    right: 24px;
+    top: 16px;
+    background: transparent;
+    border: none;
+    font-size: 26px;
+    color: var(--accent);
+    cursor: pointer;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .page-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .servicio-card .thumb {
+      height: 160px;
+    }
+    .modal-body {
+      flex-direction: column;
+    }
+    .modal-body img {
+      width: 100%;
+      height: 260px;
+    }
+    .modal-info {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .page-grid {
+      grid-template-columns: 1fr;
+    }
+    .servicio-card .thumb {
+      height: 140px;
+    }
+    .carrusel-container {
+      padding: 8px 12px;
+    }
+    .carrusel-btn {
+      width: 42px;
+      height: 42px;
+    }
+  }

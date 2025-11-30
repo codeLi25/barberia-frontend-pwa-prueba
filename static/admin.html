@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel del Admin | Barbería El Calvo</title>
+    <link rel="icon" type="image/svg+xml" href="img/logo.jpg">
+    <link rel="stylesheet" href="css/admin/dashboard.css">
+    <link rel="stylesheet" href="css/admin/inicio.css">
+    <link rel="stylesheet" href="css/admin/inventario.css">
+    <link rel="stylesheet" href="css/admin/ventas.css">
+    <link rel="stylesheet" href="css/admin/usuarios.css">
+    <link rel="stylesheet" href="css/admin/solicitudes.css">
+    <link rel="stylesheet" href="css/admin/agenda.css">
+    <link rel="stylesheet" href="css/admin/reportes.css">
+    <link rel="stylesheet" href="css/modal-error.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        .oculto-pagina {
+            display: none !important;
+        }
+    </style>
+
+    <script defer src="js/permisosRoles.js"> </script>
+
+</head>
+
+<body>
+
+    <!-- CONTENIDO OCULTO HASTA VALIDAR -->
+    <div id="contenido-pagina" class="oculto-pagina">
+
+        <div class="dashboard">
+
+            <aside class="sidebar">
+                <div class="sidebar-logo">
+                    <img src="img/logo.jpg" alt="El Calvo">
+                    <h1>El Calvo</h1>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li data-seccion="inicio" class="active">
+                            <i class="fa-solid fa-house"></i> Inicio
+                        </li>
+                        <li data-seccion="inventario">
+                            <i class="fa-solid fa-boxes-stacked"></i> Inventario
+                        </li>
+                        <li data-seccion="ventas">
+                            <i class="fa-solid fa-receipt"></i> Ventas
+                        </li>
+                        <li data-seccion="usuarios">
+                            <i class="fa-solid fa-users"></i> Usuarios
+                        </li>
+                        <li data-seccion="solicitudes">
+                            <i class="fa-solid fa-clipboard-list"></i> Solicitudes
+                        </li>
+                        <li data-seccion="agenda">
+                            <i class="fa-solid fa-calendar-days"></i> Agenda
+                        </li>
+                        <li data-seccion="reportes">
+                            <i class="fa-solid fa-chart-line"></i> Reportes
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <button class="logout-btn">
+                        <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+                    </button>
+                </div>
+            </aside>
+
+            <main class="dashboard-content">
+
+                <!-- HERO -->
+                <section class="seccion active hero-admin" id="inicio">
+                    <div class="hero-content">
+                        <h1>Bienvenido, Admin</h1>
+                        <p>
+                            Este es tu panel de control de la Barbería El Calvo. Desde aquí puedes gestionar:
+                        </p>
+                        <ul>
+                            <li><strong>Inventario:</strong> Agregar, editar o eliminar productos.</li>
+                            <li><strong>Ventas:</strong> Ver todas las transacciones y generar reportes.</li>
+                            <li><strong>Usuarios:</strong> Administrar barberos y clientes.</li>
+                            <li><strong>Solicitudes:</strong> Revisar pedidos de productos de los barberos.</li>
+                            <li><strong>Agenda:</strong> Controlar citas y horarios.</li>
+                            <li><strong>Reportes:</strong> Consultar estadísticas y rendimiento.</li>
+                        </ul>
+                    </div>
+
+                    <div class="hero-img">
+                        <img src="img/adminHero.png" alt="Panel de administración">
+                    </div>
+                </section>
+
+
+
+                <section class="seccion" id="inventario">
+                    <h2>Inventario de Productos</h2>
+
+                    <div class="inventario-container">
+                        <div class="inventario-listado">
+                            <h3>Productos para Venta</h3>
+
+                            <div class="filtroProductos" role="tablist" aria-label="Filtros tienda">
+                                <button class="filtroProductos-btn active" data-categoria="todos">Todos</button>
+                                <button class="filtroProductos-btn" data-categoria="cabello">Cabello</button>
+                                <button class="filtroProductos-btn" data-categoria="barba">Barba</button>
+                                <button class="filtroProductos-btn" data-categoria="cuidado personal">Cuidado
+                                    Personal</button>
+                            </div>
+
+                            <div class="productos-grid" id="productos-grid"></div>
+                        </div>
+
+                        <div class="inventario-formulario">
+                            <h3>Agregar / Editar Producto (Venta)</h3>
+                            <form id="form-producto">
+                                <input type="hidden" id="idProducto">
+
+                                <label for="nombre">Nombre del producto:</label>
+                                <input type="text" id="nombre" required>
+
+                                <label for="descripcion">Descripción:</label>
+                                <textarea id="descripcion" rows="2" required></textarea>
+
+                                <label for="precio">Precio (S/):</label>
+                                <input type="number" step="0.01" id="precio" required>
+
+                                <label for="stock">Stock:</label>
+                                <input type="number" id="stock" required>
+
+                                <label for="categoria">Categoría:</label>
+                                <select id="categoria" required>
+                                    <option value="Cabello">Cabello</option>
+                                    <option value="Barba">Barba</option>
+                                    <option value="Cuidado Personal">Cuidado Personal</option>
+                                </select>
+
+                                <label for="imagen">Imagen:</label>
+                                <input type="file" id="imagen" accept="image/*">
+                                <div id="preview-imagen" style="margin-top:10px;"></div>
+
+                                <div class="form-buttons">
+                                    <button type="submit" class="boton-reservar">Guardar</button>
+                                    <button type="button" id="cancelar-producto"
+                                        class="boton-cancelar">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <hr class="division-inventario" />
+
+                    <!-- ===== PRODUCTOS BARBERO ===== -->
+                    <div class="inventario-container">
+                        <div class="inventario-listado">
+                            <h3>Productos para Barberos</h3>
+
+                            <div class="solicitud-filtros" role="tablist" aria-label="Filtros solicitud productos">
+                                <button class="solicitud-filtro-btn active" data-categoria="todos">Todos</button>
+                                <button class="solicitud-filtro-btn" data-categoria="cabello">Cabello</button>
+                                <button class="solicitud-filtro-btn" data-categoria="barba">Barba</button>
+                                <button class="solicitud-filtro-btn" data-categoria="cuidado personal">Cuidado
+                                    Personal</button>
+                                <button class="solicitud-filtro-btn" data-categoria="suministros barbería">Suministros
+                                    Barbería</button>
+                            </div>
+
+                            <div class="productos-grid" id="productos-barbero-grid"></div>
+                        </div>
+
+                        <div class="inventario-formulario">
+                            <h3>Solicitar / Editar Producto (Barbero)</h3>
+                            <form id="form-producto-barbero">
+                                <input type="hidden" id="idProductoBarbero">
+
+                                <label for="nombre-barbero">Nombre del producto:</label>
+                                <input type="text" id="nombre-barbero" required>
+
+                                <label for="descripcion-barbero">Descripción:</label>
+                                <textarea id="descripcion-barbero" rows="2" required></textarea>
+
+                                <label for="stock-barbero">Stock:</label>
+                                <input type="number" id="stock-barbero" required>
+
+                                <label for="categoria-barbero">Categoría:</label>
+                                <select id="categoria-barbero" required>
+                                    <option value="Cabello">Cabello</option>
+                                    <option value="Barba">Barba</option>
+                                    <option value="Cuidado Personal">Cuidado Personal</option>
+                                    <option value="Suministros Barbería">Suministros Barbería</option>
+                                </select>
+
+                                <label for="imagen-barbero">Imagen:</label>
+                                <input type="file" id="imagen-barbero" accept="image/*">
+                                <div id="preview-imagen-barbero" style="margin-top:10px;"></div>
+
+                                <div class="form-buttons">
+                                    <button type="submit" class="boton-reservar">Guardar</button>
+                                    <button type="button" id="cancelar-barbero" class="boton-cancelar">Cancelar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="seccion" id="ventas">
+                    <h2>Registro de Ventas</h2>
+
+                    <div class="filtros-ventas">
+
+                        <div class="buscador-container">
+                            <input type="text" id="buscador-dni" placeholder="Buscar por DNI..."
+                                class="buscador-input" />
+                        </div>
+
+                        <div class="filtros-botones">
+                            <button id="btn-pendientes" class="filtro-btn pendientes-btn">Pendientes</button>
+                            <button id="btn-finalizadas" class="filtro-btn finalizadas-btn">Finalizadas</button>
+                            <button id="btn-todas" class="filtro-btn todas-btn">Todas</button>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="ventas-container">
+                        <table class="ventas-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Venta</th>
+                                    <th>Cliente</th>
+                                    <th>Total</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ventas-body"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <div id="modal-detalle" class="modal">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h3>Detalle de Venta</h3>
+                            <span class="close">&times;</span>
+                        </div>
+
+                        <div class="modal-body">
+                            <div id="detalle-venta"></div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button id="cerrar-modal-btn" class="btn-cerrar-modal">Cerrar</button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- SECCION DE USUARIOS -->
+
+                <section class="seccion" id="usuarios">
+                    <h2>Lista de Usuarios</h2>
+
+                    <div class="usuarios-container">
+                        <table class="usuarios-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre Completo</th>
+                                    <th>DNI</th>
+                                    <th>Teléfono</th>
+                                    <th>Correo Electrónico</th>
+                                    <th>Nombre de Usuario</th>
+                                    <th>Rol</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usuarios-body">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <!-- Modal para cambiar rol -->
+                <div id="modal-rol" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h3>Cambiar Rol del Usuario</h3>
+
+                        <form id="form-rol">
+                            <label for="nuevo-rol">Selecciona nuevo rol:</label>
+                            <select id="nuevo-rol" required>
+                                <option value="cliente">Cliente</option>
+                                <option value="barbero">Barbero</option>
+                                <option value="admin">Admin</option>
+                            </select>
+
+                            <!-- Campos extra SOLO visibles si el rol es Barbero -->
+                            <div id="extra-barbero" style="display: none; margin-top: 15px;">
+                                <label for="foto-barbero">Foto del barbero:</label>
+                                <input type="file" id="foto-barbero" accept="image/*" />
+
+                                <div id="preview-barbero" style="margin-top: 10px;">
+                                    <img id="preview-img" src="" alt="Vista previa"
+                                        style="max-width: 120px; display: none; border-radius: 8px;">
+                                </div>
+
+                                <label for="descripcion-barbero">Descripción:</label>
+                                <textarea id="descripcion-barbero" rows="3"
+                                    placeholder="Ejemplo: Barbero clásico con experiencia en cortes modernos"></textarea>
+                            </div>
+
+                            <div class="form-buttons">
+                                <button type="submit" class="boton-reservar">Guardar</button>
+                                <button type="button" class="boton-cancelar">Cancelar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    document.getElementById("nuevo-rol").addEventListener("change", (e) => {
+                        const extraBarbero = document.getElementById("extra-barbero");
+                        if (e.target.value === "barbero") {
+                            extraBarbero.style.display = "block";
+                        } else {
+                            extraBarbero.style.display = "none";
+                        }
+                    });
+                </script>
+
+                <section class="seccion" id="solicitudes">
+                    <h2>Solicitudes de Productos</h2>
+
+                    <div class="solicitudes-dashboard">
+
+                        <div class="solicitudes-buttons" id="tipoBtns">
+                            <button class="solicitud-btn active" data-tipo="pendientes">Pendientes</button>
+                            <button class="solicitud-btn" data-tipo="historial">Historial</button>
+                        </div>
+
+                        <div class="solicitudes-filtro">
+                            <label for="barbero-select">Selecciona Barbero:</label>
+                            <select id="barbero-select">
+                                <option value="todos">Todos</option>
+                                <!-- Los barberos se agregan dinámicamente desde el JS -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de solicitudes -->
+                    <div class="solicitudes-container">
+                        <table class="solicitudes-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Barberos</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Estado</th>
+                                    <th>Acción</th>
+                                    <th>Descargar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="solicitudes-body">
+                                <!-- Las solicitudes serán agregadas dinámicamente desde el JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+
+                <section class="seccion" id="agenda">
+                    <h2>Agenda de Turnos</h2>
+
+                    <div class="agenda-filtros-completo">
+                        <div class="agenda-filtros-estado">
+                            <button class="estado-btn" data-estado="todos">Todos</button>
+                            <button class="estado-btn" data-estado="pendiente">Pendientes</button>
+                            <button class="estado-btn" data-estado="completada">Finalizadas</button>
+                            <button class="estado-btn" data-estado="cancelada">Canceladas</button>
+                        </div>
+
+                        <div class="agenda-filtros">
+                            <div class="filtro-item">
+                                <label for="fecha-filter">Fecha:</label>
+                                <input type="date" id="fecha-filter">
+                            </div>
+
+                            <div class="filtro-item">
+                                <label for="barbero-filter">Barbero:</label>
+                                <select id="barbero-filter">
+                                    <option value="todos">Todos</option>
+                                </select>
+                            </div>
+
+                            <div class="filtro-item">
+                                <label for="servicio-filter">Servicio:</label>
+                                <select id="servicio-filter">
+                                    <option value="todos">Todos</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabla de citas -->
+                    <div class="agenda-container">
+                        <table class="agenda-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Barbero</th>
+                                    <th>Cliente</th>
+                                    <th>Servicio</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="agenda-body">
+                                <!-- El JS insertará aquí todas las citas desde el backend -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+
+                <section class="seccion" id="reportes">
+                    <h2>Reportes y Estadísticas</h2>
+
+                    <div class="reportes-filtros">
+                        <select id="tipoReporte">
+                            <option value="producto">Productos más Vendidos</option>
+                            <option value="servicio">Servicios más solicitados</option>
+                            <option value="rendimientoMensual">Rendimiento Mensual</option>
+                            <option value="citasPorMes">Número de Citas por Mes</option>
+                            <option value="citasPorBarbero">Número de Citas por Barbero</option>
+                            <option value="ventasPorMes">Ventas por Mes</option>
+                        </select>
+                        <button id="actualizarReporte">Actualizar</button>
+
+                        <button id="descargarPDF">Descargar PDF</button>
+                    </div>
+
+                    <div class="graficos-container">
+
+                        <div class="grafico-card">
+                            <h3 id="tituloGrafico">Ventas por Barbero</h3>
+                            <canvas id="graficoPrincipal"></canvas>
+                        </div>
+
+                        <div class="resumen-cards" id="resumenDinamico">
+                            <!-- Aquí JS agregará los resúmenes según tipo de reporte -->
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Librería de Chart.js -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            </main>
+        </div>
+
+        <div id="toast-container"></div>
+
+    </div> <!-- Cierre de CONTENIDO OCULTO HASTA VALIDAR -->
+
+    <script src="js/modal-error.js"></script>
+
+    <script src="js/admin/dashboard.js"></script>
+    <script src="js/admin/inventario.js"></script>
+    <script src="js/admin/ventas.js"></script>
+    <script src="js/admin/cambioRolUsuarios.js"></script>
+    <script src="js/admin/solicitudes.js"></script>
+    <script src="js/admin/agenda.js"></script>
+
+    <script src="js/admin/descargarReportes.js"></script>
+
+    <script src="js/admin/reportes.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <div id="error-acceso" style="
+    display:none;
+    position:fixed; inset:0; background:rgb(14, 14, 14);
+    flex-direction:column; justify-content:center; align-items:center;
+    font-family:sans-serif; z-index:99999; text-align:center; padding:20px;">
+
+        <img src="img/error.png" alt="error" style="width:520px; opacity:0.7; margin-bottom:20px;">
+
+        <h1 style="font-size:40px; margin-bottom:10px;">Acceso denegado</h1>
+        <p id="error-acceso-mensaje" style="font-size:18px; color:#f9f9f9;"></p>
+
+        <button id="error-acceso-btn"
+            style="margin-top:25px; padding:12px 25px; border:none; background:#ff9f1c; color:#fff; cursor:pointer; border-radius:6px;">
+            Volver al inicio
+        </button>
+    </div>
+
+</body>
+
+</html>

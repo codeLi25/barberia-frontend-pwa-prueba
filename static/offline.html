@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sin conexión - Barbería</title>
+  <link rel="stylesheet" href="css/offline.css">
+</head>
+
+<body>
+  <header class="offline-header">
+    <div class="offline-navbar">
+      <a class="offline-brand">
+        <img src="img/logo.jpg" class="offline-logo">
+        Barbería
+      </a>
+      <div class="offline-actions">
+        <a href="index.html" class="offline-btn-home">Inicio</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="offline-main">
+    <img src="img/error.png" alt="Offline Logo" class="offline-main-logo">
+    <h1 class="offline-title">No tienes conexión</h1>
+    <p class="offline-text">Tu barbería sigue aquí cuando vuelvas.</p>
+    <button class="offline-retry-btn" onclick="location.reload();">Reintentar</button>
+  </main>
+
+  <footer class="offline-footer">
+    Barbería &copy; 2025
+  </footer>
+</body>
+</html>

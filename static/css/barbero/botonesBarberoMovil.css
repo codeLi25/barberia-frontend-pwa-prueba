@@ -1,0 +1,39 @@
+.bottom-nav-barbero {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background: #111;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 2px solid #ff9f1c;
+    z-index: 9999;
+    padding-bottom: env(safe-area-inset-bottom); 
+}
+
+.bottom-nav-barbero .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+.bottom-nav-barbero .nav-item i {
+    font-size: 20px;
+    margin-bottom: 2px;
+}
+
+.bottom-nav-barbero .nav-item.active,
+.bottom-nav-barbero .nav-item:hover {
+    color: #ff9f1c;
+}
+
+@media(min-width: 768px) {
+    .bottom-nav-barbero {
+        display: none;
+    }
+}

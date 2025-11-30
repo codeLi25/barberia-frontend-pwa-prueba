@@ -1,0 +1,123 @@
+#solicitudes h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    color: #ff9a00;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.solicitudes-dashboard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px 20px 20px;
+    gap: 15px;
+}
+
+.solicitudes-buttons button {
+    background: linear-gradient(90deg, #ff9a00, #ff6a00);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #000;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+}
+
+.solicitud-btn.active,
+.solicitudes-buttons button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(255,165,0,0.6);
+}
+
+.solicitudes-filtro label {
+    margin-right: 8px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.solicitudes-filtro select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: #fff;
+}
+
+.solicitudes-container {
+    overflow-x: auto;
+    margin: 0 20px;
+}
+
+.solicitudes-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #111;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
+}
+
+.solicitudes-table th,
+.solicitudes-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.solicitudes-table th {
+    background: linear-gradient(90deg, #ff9a00, #ff6a00);
+    color: #000;
+    font-weight: 600;
+}
+
+.solicitudes-table tr:hover {
+    background: rgba(255, 165, 0, 0.1);
+}
+
+.aprobar-btn,
+.rechazar-btn,
+.descargar-btn {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #000;
+    margin: 0 2px;
+}
+
+.aprobar-btn { background: #28a745; }
+.rechazar-btn { background: #dc3545; }
+.descargar-btn { background: #ffc107; }
+
+.aprobar-btn:hover,
+.rechazar-btn:hover,
+.descargar-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .solicitudes-table th,
+    .solicitudes-table td {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .solicitudes-dashboard {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .solicitudes-table th,
+    .solicitudes-table td {
+        padding: 6px;
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,195 @@
+/* ====== AGENDA ====== */
+
+#agenda h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    color: #ff9a00;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+/* Filtros */
+.agenda-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 0 20px 20px 20px;
+}
+
+.filtro-item label {
+    margin-right: 5px;
+    font-weight: 500;
+    color: #fff;
+}
+
+.filtro-item select,
+.filtro-item input {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: #fff;
+}
+
+.agenda-container {
+    overflow-x: auto;
+    margin: 0 20px;
+}
+
+.agenda-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #111;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
+}
+
+.agenda-table th,
+.agenda-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.agenda-table th {
+    background: linear-gradient(90deg, #ff9a00, #ff6a00);
+    color: #000;
+    font-weight: 600;
+}
+
+.agenda-table tr:hover {
+    background: rgba(255, 165, 0, 0.1);
+}
+
+/* Botones de acción */
+.reasignar-btn,
+.cancelar-btn {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #000;
+    margin: 0 2px;
+}
+
+.reasignar-btn {
+    background: #17a2b8;
+}
+
+.cancelar-btn {
+    background: #dc3545;
+}
+
+.reasignar-btn:hover,
+.cancelar-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+
+    .agenda-table th,
+    .agenda-table td {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .agenda-filtros {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .agenda-table th,
+    .agenda-table td {
+        padding: 6px;
+        font-size: 0.75rem;
+    }
+}
+
+.agenda-filtros-completo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; 
+    margin: 0 20px 20px 20px;
+    flex-wrap: wrap; 
+    gap: 15px;
+}
+
+.agenda-filtros-estado {
+    display: flex;
+    gap: 10px;
+    margin-top: -5px; 
+}
+
+.estado-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    background: #ff9a00;
+    color: #000;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-top: 4px;
+}
+
+.estado-btn:hover {
+    transform: scale(1.05);
+}
+
+.estado-btn.activo {
+    box-shadow: 0 0 10px #ff9a00;
+}
+
+.agenda-filtros {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.finalizar-btn,
+.cancelar-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.finalizar-btn {
+    background: #16a34a; 
+    color: #fff;
+}
+
+.cancelar-btn {
+    background: #dc2626; 
+    color: #fff;
+}
+
+.finalizar-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(22,163,74,0.4);
+}
+
+.cancelar-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(220,38,38,0.4);
+}
+
+.finalizar-btn i,
+.cancelar-btn i {
+    font-size: 1rem; 
+}

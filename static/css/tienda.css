@@ -1,0 +1,335 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&family=Playfair+Display:wght@700&display=swap');
+
+.tienda {
+  text-align: center;
+  padding: 70px 20px;
+  background: url('../img/tienda.jpg') no-repeat center center/cover;
+  position: relative;
+  color: #fff;
+}
+
+.tienda::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 0;
+}
+
+.tienda * {
+  position: relative;
+  z-index: 1;
+}
+
+.titulo-seccion {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.4rem;
+  color: #00ffcc;
+  margin-bottom: 10px;
+  text-shadow: 0 0 12px rgba(0, 255, 204, 0.6);
+}
+
+.descripcion-seccion {
+  font-family: Montserrat, sans-serif;
+  color: #ddd;
+  margin-bottom: 40px;
+}
+
+.filtroProductos {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.filtroProductos-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  padding-bottom: 6px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filtroProductos-btn::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #00ffcc, #00cc88);
+  border-radius: 4px;
+  transition: width .3s ease;
+}
+
+.filtroProductos-btn.active::after,
+.filtroProductos-btn:hover::after {
+  width: 100%;
+}
+
+.filtroProductos-btn:hover {
+  color: #00ffcc;
+  transform: scale(1.05);
+}
+
+.carrusel-tienda-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+
+.productos-tienda-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.productos-tienda-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  transition: transform 0.6s ease, opacity 0.6s ease, filter 0.6s ease;
+  margin: 20px 0;
+}
+
+.card-producto {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 260px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  transform: translateY(10px);
+  opacity: 0;
+  animation: fadeInBlur 0.15s ease forwards;
+}
+
+@keyframes fadeInBlur {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+    filter: blur(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.card-producto:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+}
+
+.thumb-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.thumb-wrap img {
+  max-width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 10px;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.card-producto:hover .thumb-wrap img {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* texto */
+.card-producto h3 {
+  font-family: 'Playfair Display', serif;
+  color: #00ffcc;
+  font-size: 1.1rem;
+  margin: 10px 0 5px;
+}
+
+.card-producto p {
+  color: #ddd;
+  margin: 6px 0 12px;
+  font-size: .95rem;
+}
+
+/* boton agregar */
+.btn-agregar {
+  background: linear-gradient(135deg, #00ffcc, #00cc88);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #000;
+  font-family: Montserrat, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.btn-agregar:hover {
+  transform: scale(1.07);
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+}
+
+/* ====== FLECHAS ====== */
+.carrusel-tienda-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(0, 255, 204, 0.6);
+  color: #00ffcc;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.25);
+  transition: all 0.3s ease;
+}
+
+.carrusel-tienda-btn:hover {
+  background: rgba(0, 255, 204, 0.15);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carrusel-tienda-btn.prev {
+  left: 8px;
+}
+
+.carrusel-tienda-btn.next {
+  right: 8px;
+}
+
+.carrusel-tienda-btn:disabled {
+  opacity: .35;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+/* ====== PAGINACIÓN ====== */
+.productos-paginacion {
+  color: #bfbfbf;
+  font-family: Montserrat, sans-serif;
+  font-size: .95rem;
+  margin-top: 10px;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 992px) {
+  .carrusel-tienda-container {
+    padding: 0 30px;
+  }
+
+  .productos-tienda-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .carrusel-tienda-container {
+    padding: 0 15px;
+  }
+
+  .productos-tienda-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .thumb-wrap img {
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carrusel-tienda-container {
+    padding: 0 10px;
+  }
+
+  .productos-tienda-container {
+    grid-template-columns: 1fr;
+  }
+
+  .card-producto {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .thumb-wrap img {
+    max-height: 160px;
+  }
+
+  .carrusel-tienda-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+}
+
+.btn-agregar.agotado {
+  background-color: #ff3b3b;
+  color: white;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.stock-info.sin-stock {
+  color: #ff3b3b;
+  font-weight: bold;
+}
+
+.btn-cantidad.deshabilitado {
+  background-color: #ff3b3b;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+
+/* ====== RESALTAR PRODUCTO (BUSCADOR) ====== */
+.card-producto.resaltado {
+  border: 2px solid #00ffcc;
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.7), 
+              0 0 35px rgba(0, 255, 180, 0.4);
+  transform: translateY(-6px) scale(1.04);
+  transition: all 0.3s ease;
+}
+
+/* efecto de pulso suave */
+@keyframes resaltarPulse {
+  0% {
+    box-shadow: 0 0 18px rgba(0, 255, 204, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(0, 255, 204, 0.85);
+  }
+  100% {
+    box-shadow: 0 0 18px rgba(0, 255, 204, 0.6);
+  }
+}
+
+.card-producto.resaltado {
+  animation: resaltarPulse 1.6s ease-in-out infinite;
+}

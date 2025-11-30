@@ -1,0 +1,97 @@
+/* === Banner de instalación PWA === */
+.pwa-banner {
+  position: fixed;          /* SIEMPRE fijo arriba */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #5a3b2e;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem 1rem;
+  z-index: 5000;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.35s ease-in-out;
+  transform: translateY(-100%); /* Escondido arriba */
+    z-index: 99999 !important;
+}
+
+/* Mostrar banner */
+.pwa-banner.visible {
+  transform: translateY(0);
+}
+
+/* Ocultar completamente */
+.pwa-banner.hidden {
+  transform: translateY(-100%);
+}
+
+
+/* Contenido */
+.pwa-banner-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  max-width: 600px;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: white;
+}
+
+.pwa-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-install {
+  background-color: #f1c40f;
+  color: #000;
+  font-weight: 600;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-install:hover {
+  background-color: #ffda47;
+}
+
+.btn-close-banner {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   EMPUJE REAL DEL NAVBAR Y HERO CUANDO EL BANNER ESTÁ ACTIVO
+   ============================================================ */
+
+/* PC */
+body.banner-visible .navbar {
+  margin-top: 60px; /* altura real del banner */
+}
+
+body.banner-visible .hero {
+  margin-top: 60px;
+}
+
+/* Mobile: altura un poco mayor */
+@media (max-width: 768px) {
+  body.banner-visible .navbar {
+    margin-top: 70px;
+  }
+
+  body.banner-visible .hero {
+    margin-top: 70px;
+  }
+}

@@ -1,0 +1,224 @@
+#usuarios h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2rem;
+    color: #ff9a00;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.usuarios-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 0 20px;
+}
+
+.usuarios-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #111;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 15px rgba(255, 165, 0, 0.2);
+}
+
+.usuarios-table th,
+.usuarios-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.usuarios-table th {
+    background: linear-gradient(90deg, #ff9a00, #ff6a00);
+    color: #000;
+    font-weight: 600;
+}
+
+.usuarios-table tr:hover {
+    background: rgba(255, 165, 0, 0.1);
+}
+
+.cambiar-rol-btn,
+.eliminar-usuario-btn {
+    border: none;
+    background: #ff9a00;
+    color: #000;
+    padding: 6px 10px;
+    margin: 0 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.eliminar-usuario-btn {
+    background: #ff6a00;
+}
+
+.cambiar-rol-btn:hover,
+.eliminar-usuario-btn:hover {
+    transform: scale(1.1);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #1a1a1a, #121212);
+    padding: 25px 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 420px;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    box-shadow: 0 8px 25px rgba(255, 165, 0, 0.35);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: slideUp 0.35s ease forwards;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h3 {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: #ffb347;
+    letter-spacing: 0.5px;
+}
+
+.close {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    color: #ffb347;
+    font-size: 1.6rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close:hover {
+    color: #ff8800;
+}
+
+#form-rol label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #ddd;
+}
+
+#form-rol select,
+#form-rol input[type="file"],
+#form-rol textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #222;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+#form-rol select:focus,
+#form-rol input[type="file"]:focus,
+#form-rol textarea:focus {
+    outline: none;
+    border-color: #ffb347;
+    box-shadow: 0 0 5px rgba(255, 179, 71, 0.3);
+}
+
+#preview-barbero img {
+    max-width: 100px;
+    display: block;
+    border-radius: 10px;
+    margin-top: 8px;
+    border: 2px solid #ffb347;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.boton-reservar,
+.boton-cancelar {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.boton-reservar {
+    background: linear-gradient(135deg, #ffb347, #ff7e00);
+    color: #111;
+}
+
+.boton-reservar:hover {
+    background: linear-gradient(135deg, #ff9e00, #ffb347);
+    transform: translateY(-1px);
+}
+
+.boton-cancelar {
+    background: #333;
+    color: #fff;
+}
+
+.boton-cancelar:hover {
+    background: #444;
+    transform: translateY(-1px);
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 92%;
+        padding: 20px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,143 @@
+/* ============================
+   ESTILOS GENERALES
+=============================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #0d0d0d; /* Negro */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ============================
+   NAVBAR OFFLINE
+=============================== */
+.offline-header {
+  background: #111; 
+  padding: 12px 0;
+  border-bottom: 2px solid #ff7b00; /* Línea naranja */
+}
+
+.offline-navbar {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offline-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #ff7b00; /* Naranja */
+  text-decoration: none;
+}
+
+.offline-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Botón Inicio */
+.offline-btn-home {
+  padding: 8px 18px;
+  background: transparent;
+  border: 2px solid #ff7b00;
+  color: #ff7b00;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.offline-btn-home:hover {
+  background: #ff7b00;
+  color: #000;
+}
+
+/* ============================
+   MAIN
+=============================== */
+.offline-main {
+  flex: 1;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.offline-main-logo {
+  width: 120px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0px 0px 6px #ff7b00aa);
+}
+
+.offline-title {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #ff7b00; 
+}
+
+.offline-text {
+  font-size: 18px;
+  margin-bottom: 25px;
+  color: #cccccc;
+}
+
+/* Botón Reintentar */
+.offline-retry-btn {
+  padding: 12px 26px;
+  background: #ff7b00;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.offline-retry-btn:hover {
+  background: #ff8800;
+  transform: scale(1.05);
+}
+
+/* ============================
+   FOOTER
+=============================== */
+.offline-footer {
+  background: #111;
+  text-align: center;
+  padding: 12px;
+  color: #ff7b00;
+  font-weight: 600;
+  border-top: 2px solid #ff7b00;
+}
+
+/* ============================
+   RESPONSIVE
+=============================== */
+@media (max-width: 600px) {
+  .offline-title {
+    font-size: 26px;
+  }
+
+  .offline-text {
+    font-size: 16px;
+  }
+
+  .offline-main-logo {
+    width: 100px;
+  }
+}

@@ -1,0 +1,102 @@
+.reportes-filtros {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.reportes-filtros select,
+.reportes-filtros button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+}
+
+.reportes-filtros select {
+    background: #1f1f1f;
+    color: #fff;
+    border: 1px solid #333;
+}
+
+.reportes-filtros button {
+    background: #ff9a00;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.reportes-filtros button:hover {
+    background: #ffa733;
+}
+
+.graficos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+.grafico-card {
+    background: #1c1c1c;
+    border-radius: 12px;
+    padding: 20px;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.grafico-card h3 {
+    color: #ff9a00;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.resumen-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+
+.resumen-item {
+    background: #27293d;
+    padding: 15px;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+}
+.resumen-item h4 {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #ff9a00;
+}
+.detalle-rendimiento {
+    margin: 0;
+    padding-left: 15px;
+    list-style-type: disc;
+}
+.detalle-rendimiento li {
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.resumen-item p {
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+@media (max-width: 768px) {
+    .grafico-card {
+        width: 100%;
+    }
+
+    .resumen-item {
+        min-width: 100%;
+    }
+}
+
+

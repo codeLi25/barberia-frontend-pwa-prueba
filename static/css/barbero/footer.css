@@ -1,0 +1,121 @@
+.footer-panel {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0d0d0d 100%);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  border-top: 3px solid #ff9100;
+  padding-top: 30px;
+  box-shadow: 0 -6px 20px rgba(255, 145, 0, 0.15);
+}
+
+.footer-panel-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-panel-brand h2 {
+  color: #ff9100;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.footer-panel-tagline {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.footer-panel-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-panel-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.95rem;
+  position: relative;
+  transition: 0.3s;
+}
+
+.footer-panel-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #ff9100;
+  transition: width 0.3s;
+}
+
+.footer-panel-links a:hover {
+  color: #ff9100;
+}
+
+.footer-panel-links a:hover::after {
+  width: 100%;
+}
+
+.footer-panel-social {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-panel-social a {
+  color: #fff;
+  background: #222;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(255, 145, 0, 0.15);
+}
+
+.footer-panel-social a:hover {
+  background: #ff9100;
+  color: #000;
+  transform: scale(1.1);
+}
+
+.footer-panel-bottom {
+  background: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  padding: 15px 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-panel-bottom p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.footer-panel-bottom span {
+  color: #ff9100;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .footer-panel-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-panel-links {
+    justify-content: center;
+  }
+
+  .footer-panel-social {
+    justify-content: center;
+  }
+}

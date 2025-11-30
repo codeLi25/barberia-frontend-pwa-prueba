@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: url('../img/fondoLogin.jpeg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+        height: 100dvh;
+        min-height: 100dvh;
+    }
+}
+
+.container {
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(255, 153, 0, 0.3);
+    padding: 40px 30px;
+    width: 90%;
+    max-width: 420px;
+    color: #fff;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-box h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ff9a00;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    font-size: 14px;
+    color: #f2f2f2;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.input-group input::placeholder {
+    color: #aaa;
+}
+
+.input-group input:focus {
+    border-color: #ff9a00;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff9a00, #ff6a00);
+    border: none;
+    border-radius: 25px;
+    color: #000;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 153, 0, 0.6);
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255, 153, 0, 0.9);
+}
+
+.redirect {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.redirect a {
+    color: #ff9a00;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.redirect a:hover {
+    color: #ffa733;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body.register-page {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding: 40px 0;
+}
+
+body.register-page .container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+}
+
+@media (max-width: 480px) {
+    body {
+        background-position: center;
+        background-attachment: scroll;
+        min-height: 100dvh;
+    }
+
+    .container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .form-box h1 {
+        font-size: 1.7rem;
+    }
+
+    .btn {
+        font-size: 15px;
+    }
+}
+
+@supports (height: 100dvh) {
+
+    html,
+    body {
+        height: 100dvh !important;
+    }
+}
+
+body {
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+    overflow-x: hidden;
+}

@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería El Calvo</title>
+    <link rel="icon" type="image/svg+xml" href="img/logo.jpg">
+    <!-- PWA manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#b8860b">
+
+    <!-- Redirección offline -->
+    <script>
+        if (!navigator.onLine) {
+            window.location.href = "/offline.html";
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/navHero.css">
+    <link rel="stylesheet" href="css/nosotros.css">
+    <link rel="stylesheet" href="css/servicios.css">
+    <link rel="stylesheet" href="css/tienda.css">
+    <link rel="stylesheet" href="css/agendar-citas.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/carrito.css">
+    <link rel="stylesheet" href="css/modal-error.css">
+    <link rel="stylesheet" href="css/modal-compra.css">
+    <link rel="stylesheet" href="css/botonesMovil.css">
+    <link rel="stylesheet" href="css/modalPwa.css">
+
+    <style>
+        .oculto-pagina {
+            display: none !important;
+        }
+    </style>
+
+    <!-- Registrar Service Worker -->
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("service-worker.js")
+                    .then(() => console.log("💈 SW registrado"))
+                    .catch(err => console.error("❌ Error SW:", err));
+            });
+        }
+    </script>
+
+    <script defer src="js/permisosRoles.js"></script>
+    <script defer src="js/bottonHamburger.js"></script>
+    <script defer src="js/carrusellNosotros.js"></script>
+    <script defer src="js/filtroServicios.js"></script>
+    <script defer src="js/servicios.js"></script>
+    <script defer src="js/tienda.js"></script>
+    <script defer src="js/carrito.js"></script>
+
+    <script defer src="js/venta.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- 🔽 Banner de instalación PWA -->
+    <div id="pwa-install-banner" class="pwa-banner hidden">
+        <div class="pwa-banner-content">
+            <span>Instala <strong>Café Ágora</strong> en tu dispositivo</span>
+            <div class="pwa-buttons">
+                <button id="btn-install" class="btn-install">Instalar</button>
+                <button id="btn-close-banner" class="btn-close-banner">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENIDO OCULTO HASTA VALIDAR -->
+    <div id="contenido-pagina" class="oculto-pagina">
+
+        <!-- NAVBAR -->
+        <header class="navbar">
+            <div class="logo-container">
+                <a href="/" class="logo-container">
+                    <img src="img/logo.jpg" alt="Logo El Calvo" class="logo-img">
+                    <div class="logo-text">EL CALVO</div>
+                </a>
+            </div>
+
+            <nav class="nav-links" id="nav-links">
+                <a href="#inicio" class="active">Inicio</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#tienda">Tienda</a>
+                <a href="#citas"> Citas </a>
+                <a href="#contactos">Contactos</a>
+
+                <!--CUANDO SE LOGUEA COMO USUARIO SE ACTIVA ESTA OPCION  -->
+                <!-- <a href="usuario.html">Historial</a> -->
+
+                <div class="search-container-mobile">
+                    <input type="text" id="search-mobile" placeholder="Buscar..." class="search-mobile">
+                    <i id="lupa-mobile" class="fas fa-search"></i>
+
+                    <ul id="buscador-sugerencias-mobile" class="dropdown-sugerencias"></ul>
+                </div>
+
+            </nav>
+
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" id="search-desktop" placeholder="Buscar" class="search">
+                    <i id="lupa-desktop" class="fas fa-search search-icon"></i>
+
+
+                    <ul id="buscador-sugerencias-desktop" class="dropdown-sugerencias"></ul>
+                </div>
+
+                <a id="btn-carrito" class="btn-cart position-relative" aria-label="Ver carrito">
+                    <i class="fas fa-shopping-cart fs-4"></i>
+                    <span id="carrito-contador">0</span>
+                </a>
+                <a href="#citas"> <button class="botonreservar">Reservar Cita</button></a>
+                <a href="/login.html"> <button class="iniciar">Iniciar Sesión</button> </a>
+                <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+            </div>
+
+        </header>
+
+
+        <!-- HERO -->
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <h1>Bienvenidos a la <br> Barbería El Calvo</h1>
+                <p>
+                    En El Calvo, vivirás la esencia de una barbería con tradición e historia.
+                    Un espacio donde el estilo y el cuidado personal se combinan con la experiencia de nuestros
+                    barberos.
+                    Disfruta de un servicio auténtico, cortes clásicos y modernos, y el ambiente único que solo una
+                    barbería
+                    con legado puede ofrecerte.
+                </p>
+                <a href="#citas"> <button class="boton-reservar">Reservar una cita</button> </a>
+            </div>
+            <div class="hero-img">
+                <img src="img/barberHero.jpg" alt="Barbero atendiendo a un cliente">
+            </div>
+        </section>
+
+        <!-- NOSOTROS -->
+        <section class="nosotros" id="nosotros">
+            <h2 class="nosotros-title">Nuestro Equipo</h2>
+            <p class="nosotros-desc">
+                Conoce a los barberos que hacen posible la experiencia única en <strong>El Calvo</strong>.
+            </p>
+
+            <div class="nosotros-container">
+
+                <div class="carousel-container">
+                    <div class="carousel">
+                        <div class="carousel-track">
+                            <div class="carousel-item">
+                                <img src="img/barberos/barber1.jpeg" alt="Barbero 1">
+                                <h3>Carlos</h3>
+                                <p>Especialista en cortes clásicos</p>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/barberos/barber2.png" alt="Barbero 2">
+                                <h3>José</h3>
+                                <p>Experto en fades y estilo moderno</p>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/barberos/barber3.jpeg" alt="Barbero 3">
+                                <h3>Andrés</h3>
+                                <p>Maestro en barbas y detalles</p>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="img/barberos/barber4.jpeg" alt="Barbero 4">
+                                <h3>Mario</h3>
+                                <p>Creatividad y estilo urbano</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="carousel-btn prev"><span>&#10094;</span></button>
+                    <button class="carousel-btn next"><span>&#10095;</span></button>
+
+                    <div class="carousel-indicators">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+
+                <div class="nosotros-texto">
+                    <p>
+                        En <strong>El Calvo</strong>, llevamos la tradición de la barbería a otro nivel.
+                        Somos un espacio donde el estilo clásico y la modernidad conviven,
+                        ofreciendo a cada cliente una experiencia única de cuidado personal.
+                    </p>
+                    <p>
+                        Nuestra misión es realzar la personalidad de cada cliente a través de un
+                        servicio auténtico, profesional y cercano. Nos guiamos por valores como:
+                    </p>
+                    <ul>
+                        <li><strong>Tradición:</strong> mantener vivo el arte de la barbería clásica.</li>
+                        <li><strong>Calidad:</strong> trabajar con productos y técnicas de primer nivel.</li>
+                        <li><strong>Confianza:</strong> crear un ambiente familiar donde todos se sientan cómodos.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICIOS -->
+
+        <section class="servicios" id="servicios">
+            <h2 class="servicios-title">Nuestros Servicios</h2>
+            <p class="servicios-desc">Disfruta de los mejores cortes, cuidado facial y estilo profesional.</p>
+
+            <div class="servicios-filtros" role="tablist" aria-label="Filtros de servicios">
+                <button class="filtro-btn" data-filtro="cortes" aria-pressed="false">Cortes</button>
+                <button class="filtro-btn" data-filtro="barba" aria-pressed="false">Barba</button>
+                <button class="filtro-btn" data-filtro="facial" aria-pressed="false">Cuidado Facial</button>
+                <button class="filtro-btn" data-filtro="paquete" aria-pressed="false">Paquete Completo</button>
+            </div>
+
+            <div class="carrusel-container" aria-live="polite">
+                <button class="carrusel-btn prev" aria-label="Anterior" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <div class="servicios-grid" aria-roledescription="carousel"></div>
+
+                <button class="carrusel-btn next" aria-label="Siguiente" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="carousel-dots" aria-hidden="false"></div>
+        </section>
+
+        <!-- TIENDA -->
+        <section class="section tienda" id="tienda">
+            <h2 class="servicios-title">Tienda</h2>
+            <p class="servicios-desc">
+                Encuentra productos exclusivos para el cuidado de tu cabello y barba.
+            </p>
+
+            <div class="filtroProductos" role="tablist" aria-label="Filtros tienda">
+                <button class="filtroProductos-btn active" data-categoria="todos">Todos</button>
+                <button class="filtroProductos-btn" data-categoria="cabello">Cabello</button>
+                <button class="filtroProductos-btn" data-categoria="barba">Barba</button>
+                <button class="filtroProductos-btn" data-categoria="cuidado personal">Cuidado Personal</button>
+            </div>
+
+            <div class="carrusel-tienda-container">
+                <button class="carrusel-tienda-btn prev" aria-label="Anterior" type="button">❮</button>
+
+                <div class="productos-tienda-wrapper">
+                    <div class="productos-tienda-container" id="productos-tienda-container" role="list"></div>
+                </div>
+
+                <button class="carrusel-tienda-btn next" aria-label="Siguiente" type="button">❯</button>
+            </div>
+
+            <div class="productos-paginacion" id="productos-paginacion" aria-hidden="false"
+                style="margin-top:18px; text-align:center; color:#bfbfbf"></div>
+        </section>
+
+        <!-- PANEL DE CARRITO -->
+        <div id="carrito-panel" class="carrito-panel">
+            <div class="carrito-header">
+                <h2>Tu Carrito</h2>
+                <button id="cerrar-carrito" class="cerrar-btn">&times;</button>
+            </div>
+
+            <div class="linea-naranja"></div>
+
+            <ul id="carrito-lista" class="carrito-lista"></ul>
+
+            <div class="linea-naranja"></div>
+
+            <div class="carrito-footer">
+                <h3>Total: <span id="carrito-total">S/ 0.00</span></h3>
+                <button id="continuar-compra" class="continuar-btn">Continuar con la compra</button>
+            </div>
+        </div>
+
+
+        <!-- Modal de Confirmación de Compra -->
+        <div id="modalCompra" class="modal-compra hidden">
+            <div class="modal-content">
+                <h2>Confirmar Compra</h2>
+                <form id="formCompra" class="modal-grid">
+
+                    <div class="col datos-cliente">
+                        <h3>Datos del cliente</h3>
+
+                        <div class="form-group">
+                            <label for="nombreCliente">Nombre completo:</label>
+                            <input type="text" id="nombreCliente" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dniCliente">DNI:</label>
+                            <input type="text" id="dniCliente" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefonoCliente">Teléfono:</label>
+                            <input type="text" id="telefonoCliente" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="correoCliente">Correo:</label>
+                            <input type="text" id="correoCliente" readonly />
+                        </div>
+                    </div>
+
+                    <div class="col metodo-pago">
+                        <h3>Método de pago</h3>
+
+                        <div class="form-group">
+                            <label for="metodoPago">Seleccione método:</label>
+                            <select id="metodoPago" required>
+                                <option value="">Seleccione...</option>
+                                <option value="Tarjeta">Tarjeta</option>
+                                <option value="Yape">Yape</option>
+                                <option value="Efectivo">Efectivo</option>
+                            </select>
+                        </div>
+
+                        <div id="extraCampos" class="extra-campos hidden"></div>
+                    </div>
+                </form>
+
+                <div class="modal-buttons">
+                    <button type="button" id="cancelarCompra">Cancelar</button>
+                    <button type="submit" id="confirmarCompra" form="formCompra">Confirmar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CITAS -->
+        <section class="cita-section" id="citas">
+            <h2 class="servicios-title">Agendar tu Cita</h2>
+            <p class="servicios-desc">
+                Reserva tu turno con tu barbero de confianza y disfruta la mejor experiencia.
+            </p>
+
+            <div class="cita-container">
+                <div class="cita-imagen">
+                    <img src="img/citas.jpg" alt="Barbería">
+                </div>
+
+                <div class="cita-formulario">
+                    <form id="form-cita">
+                        <div class="form-row">
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label class="form-label">Fecha</label>
+                                    <div class="custom-calendar-container">
+                                        <div class="calendar-header">
+                                            <button type="button" class="calendar-nav prev-month">‹</button>
+                                            <h3 class="calendar-month-year">Octubre 2025</h3>
+                                            <button type="button" class="calendar-nav next-month">›</button>
+                                        </div>
+                                        <div class="calendar-weekdays">
+                                            <div>L</div>
+                                            <div>M</div>
+                                            <div>X</div>
+                                            <div>J</div>
+                                            <div>V</div>
+                                            <div>S</div>
+                                            <div>D</div>
+                                        </div>
+                                        <div class="calendar-days" id="calendar-days">
+                                        </div>
+                                        <div class="calendar-actions">
+                                            <button type="button" class="calendar-btn today-btn">Hoy</button>
+                                            <button type="button" class="calendar-btn clear-btn">Borrar</button>
+                                        </div>
+                                        <input type="hidden" id="fecha-calendario" name="fecha" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label class="form-label">Horario</label>
+                                    <div class="time-slots-container">
+                                        <div class="time-slots-grid" id="time-slots">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="hora" name="hora" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <!-- Barberos -->
+                            <!-- <div class="form-column">
+                            <div class="form-group">
+                                <label class="form-label">Barbero</label>
+                                <div class="barberos-lista" id="barberos-lista">
+                                    <div class="barbero-card" data-id="1" data-nombre="Carlos">
+                                        <img src="img/barberos/barber1.jpeg" alt="Carlos">
+                                        <p>Carlos</p>
+                                    </div>
+                                    <div class="barbero-card" data-id="2" data-nombre="José">
+                                        <img src="img/barberos/barber2.png" alt="José">
+                                        <p>José</p>
+                                    </div>
+                                    <div class="barbero-card" data-id="3" data-nombre="Andrés">
+                                        <img src="img/barberos/barber3.jpeg" alt="Andrés">
+                                        <p>Andrés</p>
+                                    </div>
+                                    <div class="barbero-card" data-id="4" data-nombre="Mario">
+                                        <img src="img/barberos/barber4.jpeg" alt="Mario">
+                                        <p>Mario</p>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="barbero" name="barbero" required>
+                            </div>
+                        </div> -->
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label class="form-label">Barbero</label>
+                                    <div class="barberos-lista" id="barberos-lista">
+                                        <!-- Aquí se cargarán los barberos desde JS -->
+                                    </div>
+                                    <input type="hidden" id="barbero" name="barbero" required>
+                                </div>
+                            </div>
+                            <div class="form-column">
+                                <div class="form-group">
+                                    <label class="form-label">Servicio</label>
+                                    <div class="servicios-botones" id="servicios-botones">
+                                        <button type="button" class="servicio-btn" data-servicio="corte"
+                                            data-precio="25">
+                                            <span class="servicio-nombre">Corte</span>
+                                            <span class="servicio-precio">S/.15</span>
+                                        </button>
+                                        <button type="button" class="servicio-btn" data-servicio="corte_barba"
+                                            data-precio="40">
+                                            <span class="servicio-nombre">Corte + Barba</span>
+                                            <span class="servicio-precio">S/.25</span>
+                                        </button>
+                                        <button type="button" class="servicio-btn" data-servicio="3" data-precio="0">
+                                            <span class="servicio-nombre">Extra (Precio a tratar)</span>
+                                            <span class="servicio-precio">Personalizado</span>
+                                        </button>
+                                    </div>
+                                    <input type="hidden" id="servicio" name="servicio" required>
+                                    <input type="hidden" id="precio-servicio" name="precio_servicio">
+                                </div>
+
+                                <div class="form-group oculto" id="extra-detalle-group">
+                                    <label for="extra-detalle" class="form-label">Detalles del servicio extra</label>
+                                    <textarea id="extra-detalle" name="extra_detalle" rows="3"
+                                        placeholder="Describe el servicio adicional que necesitas..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-cita">Agendar Cita</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <script defer src="js/agendarCitas.js"></script>
+        <script defer src="js/servicioExtra.js"></script>
+        <script src="js/barberos.js"></script>
+
+        <!-- FOOTER -->
+        <footer class="footer" id="contactos">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <h2>El Calvo</h2>
+                        <span class="logo-badge">Premium</span>
+                    </div>
+                    <p class="brand-tagline">Tu estilo, nuestra pasión.</p>
+                    <p class="brand-description">
+                        Más de 10 años de experiencia brindando los mejores cortes y
+                        servicios de barbería con atención personalizada y calidad premium.
+                    </p>
+                    <div class="brand-certifications">
+                        <span class="certification-badge">Certificado Profesional</span>
+                        <span class="certification-badge">Equipos Premium</span>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="#nosotros"><i class="fas fa-chevron-right"></i> Nosotros</a></li>
+                        <li><a href="#servicios"><i class="fas fa-chevron-right"></i> Servicios</a></li>
+                        <li><a href="#tienda"><i class="fas fa-chevron-right"></i> Tienda</a></li>
+                        <li><a href="#citas"><i class="fas fa-chevron-right"></i> Reservar Cita</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contacto">
+                    <h3>Contáctanos</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Dirección</strong>
+                                <p>Av. Liverpool 550, Distrito Centro<br>Ciudad, Huancayo</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Teléfono</strong>
+                                <p>+51 950 749 172</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Email</strong>
+                                <p>elcalvo@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <strong>Horario</strong>
+                                <p>Mar - Dom: 9:00 - 20:00</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="footer-newsletter">
+                    <!-- <h3>Mantente Informado</h3>
+                <p>Suscríbete para recibir promociones exclusivas y tips de cuidado.</p>
+                <form class="newsletter-form">
+                    <div class="input-group">
+                        <input type="email" placeholder="Tu correo electrónico" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form> -->
+
+                    <div class="footer-redes">
+                        <h3>Síguenos en Redes</h3>
+                        <div class="redes-icons">
+                            <a href="https://facebook.com" target="_blank" class="redes-btn facebook">
+                                <i class="fab fa-facebook-f"></i>
+                                <span>Facebook</span>
+                            </a>
+                            <a href="https://instagram.com" target="_blank" class="redes-btn instagram">
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                            </a>
+                            <a href="https://wa.me/51950749172" target="_blank" class="redes-btn whatsapp">
+                                <i class="fab fa-whatsapp"></i>
+                                <span>WhatsApp</span>
+                            </a>
+                            <a href="https://tiktok.com" target="_blank" class="redes-btn tiktok">
+                                <i class="fab fa-tiktok"></i>
+                                <span>TikTok</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-payments">
+                <div class="payments-container">
+                    <span>Métodos de pago aceptados:</span>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa" title="Visa"></i>
+                        <i class="fab fa-cc-mastercard" title="Mastercard"></i>
+                        <i class="fab fa-cc-amex" title="American Express"></i>
+                        <i class="fab fa-cc-paypal" title="PayPal"></i>
+                        <i class="fas fa-money-bill-wave" title="Efectivo"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-container">
+                    <p>&copy; 2025 Barbería El Calvo — Todos los derechos reservados</p>
+                    <!-- <div class="footer-legal">
+                    <a href="#">Política de Privacidad</a>
+                    <a href="#">Términos de Servicio</a>
+                    <a href="#">Aviso Legal</a>
+                </div> -->
+                </div>
+            </div>
+
+            <!-- Botón flotante WhatsApp -->
+            <!-- <a href="https://wa.me/51950749172" target="_blank" class="whatsapp-float">
+                <i class="fab fa-whatsapp"></i>
+                <span class="whatsapp-tooltip">¿Necesitas ayuda?</span>
+            </a> -->
+        </footer>
+
+        <div id="toast-container"></div>
+
+    </div> <!-- Cierre de CONTENIDO OCULTO HASTA VALIDAR -->
+
+    <script src="js/modal-error.js"></script>
+    <script src="js/auth-autenticacion.js"></script>
+    <script src="js/citas-api.js"></script>
+    <script src="js/buscador.js"> </script>
+
+
+    <!-- <div id="error-acceso" style="display:none; 
+    position:fixed; inset:0; background:rgb(11, 10, 10);
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    font-family:sans-serif; z-index:99999; text-align:center; padding:20px;">
+
+        <img src="img/error.png" alt="error" style="width:520px; opacity:0.7; margin-bottom:20px;">
+
+        <h1 style="font-size:40px; margin-bottom:10px;">Acceso denegado</h1>
+        <p id="error-acceso-mensaje" style="font-size:18px; color:#f9f9f9;"></p>
+
+        <button id="error-acceso-btn"
+            style="margin-top:25px; padding:12px 25px; border:none; background:#ff9f1c; color:#fff; cursor:pointer; border-radius:6px;">
+            Volver al inicio
+        </button>
+    </div> -->
+
+    <!-- ===== BOTTOM NAV / BARRA INFERIOR ===== -->
+    <div class="bottom-nav">
+
+        <a href="#inicio" class="bottom-item">
+            <i class="fas fa-home"></i>
+            <span>Inicio</span>
+        </a>
+
+        <a href="#servicios" class="bottom-item">
+            <i class="fas fa-cut"></i>
+            <span>Servicios</span>
+        </a>
+
+        <a href="#tienda" class="bottom-item">
+            <i class="fas fa-store"></i>
+            <span>Tienda</span>
+        </a>
+
+        <a href="#citas" class="bottom-item">
+            <i class="fas fa-calendar-check"></i>
+            <span>Citas</span>
+        </a>
+
+        <!-- SOLO SI EL USUARIO ESTÁ LOGUEADO -->
+        <a id="btn-historial" href="usuario.html" class="bottom-item" style="display:none;">
+            <i class="fas fa-clock"></i>
+            <span>Historial</span>
+        </a>
+    </div>
+
+</body>
+
+</html>

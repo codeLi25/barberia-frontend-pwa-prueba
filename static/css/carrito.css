@@ -1,0 +1,249 @@
+.carrito-panel {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 350px;
+  height: 100%;
+  background: #0d0d0d;
+  color: #fff;
+  box-shadow: -2px 0 15px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.4s ease-in-out;
+  z-index: 2000;
+}
+
+.carrito-panel.abierto {
+  right: 0;
+}
+
+.carrito-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem;
+  background: #0d0d0d;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.carrito-header h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.cerrar-btn {
+  background: none;
+  border: none;
+  color: #ff7b00;
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.3s;
+}
+
+.cerrar-btn:hover {
+  color: #ff9f1c;
+  transform: rotate(90deg);
+}
+
+.linea-naranja {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, #ff7b00, #ffb347);
+  border-radius: 2px;
+  margin: 0;
+}
+
+.linea-naranja:first-of-type {
+  position: sticky;
+  top: 70px;
+  z-index: 9;
+}
+
+.linea-naranja:last-of-type {
+  position: sticky;
+  bottom: 85px; 
+  z-index: 9;
+}
+
+.carrito-lista {
+  list-style: none;
+  padding: 1rem;
+  margin: 0;
+  flex: 1;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ff7b00 #1a1a1a;
+}
+
+.carrito-lista::-webkit-scrollbar {
+  width: 8px;
+}
+.carrito-lista::-webkit-scrollbar-thumb {
+  background-color: #ff7b00;
+  border-radius: 10px;
+}
+
+.carrito-item {
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.carrito-item:hover {
+  transform: scale(1.02);
+}
+
+.carrito-item img {
+  width: 70px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.carrito-item .info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; 
+}
+
+.carrito-item .info h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.carrito-item .cantidad {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-cantidad {
+  background: #ff7b00;
+  border: none;
+  color: #0d0d0d;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-cantidad:hover {
+  background: #ff9f1c;
+}
+
+.carrito-item p {
+  color: #ffb347;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0;
+  justify-self: end;
+}
+
+.btn-eliminar {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: #ff3333;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.btn-eliminar:hover {
+  color: #ff6666;
+}
+
+/* === FOOTER === */
+.carrito-footer {
+  background: #0d0d0d;
+  padding: 1rem;
+  text-align: center;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.carrito-footer h3 {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin: 12px 0;
+}
+
+/* === BOTÓN CONTINUAR === */
+.continuar-btn {
+  width: 100%;
+  background: #ff7b00;
+  color: #0d0d0d;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.continuar-btn:hover {
+  background: #ff9f1c;
+  transform: scale(1.03);
+}
+
+.btn-cart {
+  position: relative;
+  display: inline-block;
+}
+
+#carrito-contador {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  background-color: #ff3333;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid #0d0d0d;
+  cursor: pointer;
+}
+
+.fa-solid, .fas {
+    font-weight: 900;
+    cursor: pointer;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .carrito-panel {
+    width: 100%;
+    right: -100%;
+    z-index: 10000 !important;
+  }
+  .carrito-panel.abierto {
+    right: 0;
+  }
+}
