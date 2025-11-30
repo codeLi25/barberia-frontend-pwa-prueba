@@ -7,7 +7,7 @@
     <title>Barbería El Calvo</title>
     <link rel="icon" type="image/svg+xml" href="img/logo.jpg">
     <!-- PWA manifest -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#b8860b">
 
     <!-- Redirección offline -->
@@ -39,7 +39,7 @@
     <script>
         if ("serviceWorker" in navigator) {
             window.addEventListener("load", () => {
-                navigator.serviceWorker.register("service-worker.js")
+                navigator.serviceWorker.register("/service-worker.js")
                     .then(() => console.log("💈 SW registrado"))
                     .catch(err => console.error("❌ Error SW:", err));
             });
