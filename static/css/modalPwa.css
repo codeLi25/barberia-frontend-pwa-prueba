@@ -87,10 +87,10 @@ body.banner-visible .navbar {
 /* Mobile: altura un poco mayor */
 @media (max-width: 768px) {
   body.banner-visible .navbar {
-    margin-top: 70px;
+     margin-top: 90px;
   }
 
-  body.banner-visible .hero {
+  /* body.banner-visible .hero {
     margin-top: 70px;
-  }
+  } */
 }
