@@ -39,7 +39,6 @@
   max-width: 600px;
   gap: 10px;
   flex-wrap: wrap;
-  background: white;
 }
 
 .pwa-buttons {
@@ -81,9 +80,9 @@ body.banner-visible .navbar {
   margin-top: 60px; /* altura real del banner */
 }
 
-body.banner-visible .hero {
+/* body.banner-visible .hero {
   margin-top: 60px;
-}
+} */
 
 /* Mobile: altura un poco mayor */
 @media (max-width: 768px) {
