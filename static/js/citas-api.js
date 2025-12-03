@@ -36,7 +36,50 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, 250);
     }
-    // Cargar barberos y servicios desde backend (para asegurar ids)
+
+    // ==========================
+    // NUEVA FUNCIÓN: VER TODAS LAS CITAS DEL USUARIO
+    // ==========================
+    async function verTodasLasCitas() {
+        try {
+            const usuario = JSON.parse(localStorage.getItem('usuario'));
+            if (!usuario || !usuario.idUsuario) return;
+
+            const res = await fetch(`https://app-barberia-production.up.railway.app/api/citas/usuario/${usuario.idUsuario}`);
+            if (!res.ok) throw new Error('Error al cargar las citas');
+
+            const citas = await res.json();
+            const contCitas = document.getElementById('lista-citas');
+            if (!contCitas) return;
+
+            contCitas.innerHTML = '';
+
+            if (citas.length === 0) {
+                contCitas.innerHTML = '<p>No tienes citas registradas.</p>';
+                return;
+            }
+
+            citas.forEach(cita => {
+                const div = document.createElement('div');
+                div.className = 'cita-card';
+                div.innerHTML = `
+                    <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                    <p><strong>Hora:</strong> ${cita.horaInicio}</p>
+                    <p><strong>Barbero:</strong> ${cita.idBarbero}</p>
+                    <p><strong>Servicio:</strong> ${cita.idServicio}</p>
+                    <p><strong>Precio:</strong> S/ ${cita.precio.toFixed(2)}</p>
+                `;
+                contCitas.appendChild(div);
+            });
+        } catch (err) {
+            console.error(err);
+            // No tocamos showToast, lo manejas desde otro JS
+        }
+    }
+
+    // ==========================
+    // Cargar barberos y servicios
+    // ==========================
     cargarBarberos();
     cargarServicios();
 
@@ -210,4 +253,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('No se pudieron cargar los servicios:', err);
         }
     }
+
+    // ==========================
+    // Llamar la función nueva
+    // ==========================
+    verTodasLasCitas();
 });
