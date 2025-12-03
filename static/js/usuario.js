@@ -138,6 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // ============================
 // Ejecutar también cuando se vuelve a la página desde otra (back/forward)
 // ============================
-window.addEventListener("pageshow", () => {
-    cargarCitas();
+window.addEventListener("pageshow", (event) => {
+    if (event.persisted || localStorage.getItem("actualizarCitas") === "true") {
+        cargarCitas();
+        localStorage.removeItem("actualizarCitas");
+    }
 });
