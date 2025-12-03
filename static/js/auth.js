@@ -33,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 correo,
                 username,
                 contrasena,
-                idRol: 1  // ROL CLIENTE POR DEFECTO
             };
 
             try {
