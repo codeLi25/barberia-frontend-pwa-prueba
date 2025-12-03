@@ -41,41 +41,74 @@ document.addEventListener('DOMContentLoaded', () => {
     // NUEVA FUNCIÓN: VER TODAS LAS CITAS DEL USUARIO
     // ==========================
     async function verTodasLasCitas() {
-        try {
-            const usuario = JSON.parse(localStorage.getItem('usuario'));
-            if (!usuario || !usuario.idUsuario) return;
+    try {
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const token = localStorage.getItem("token");
+        if (!usuario || !usuario.idUsuario) return;
 
-            const res = await fetch(`https://app-barberia-production.up.railway.app/api/citas/usuario/${usuario.idUsuario}`);
-            if (!res.ok) throw new Error('Error al cargar las citas');
+        const res = await fetch(`https://app-barberia-production.up.railway.app/api/citas/usuario/${usuario.idUsuario}`, {
+            headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!res.ok) throw new Error("Error al cargar las citas");
 
-            const citas = await res.json();
-            const contCitas = document.getElementById('lista-citas');
-            if (!contCitas) return;
+        const citas = await res.json();
 
-            contCitas.innerHTML = '';
+        const citasActivasContainer = document.getElementById("citas-activas");
+        const historialContainer = document.getElementById("historial-citas");
+        if (!citasActivasContainer || !historialContainer) return;
 
-            if (citas.length === 0) {
-                contCitas.innerHTML = '<p>No tienes citas registradas.</p>';
-                return;
-            }
+        // Limpiar contenedores
+        citasActivasContainer.innerHTML = "";
+        historialContainer.innerHTML = "";
 
-            citas.forEach(cita => {
-                const div = document.createElement('div');
-                div.className = 'cita-card';
-                div.innerHTML = `
+        // Separar citas activas e historial
+        const citasActivas = citas.filter(cita => cita.estado === "pendiente" || cita.estado === "confirmada");
+        const citasHistorial = citas.filter(cita => cita.estado === "completada" || cita.estado === "cancelada");
+
+        // Renderizar activas
+        citasActivas.forEach(cita => {
+            const div = document.createElement("div");
+            div.classList.add("card");
+            div.innerHTML = `
+                <div class="card-info">
                     <p><strong>Fecha:</strong> ${cita.fecha}</p>
-                    <p><strong>Hora:</strong> ${cita.horaInicio}</p>
-                    <p><strong>Barbero:</strong> ${cita.idBarbero}</p>
-                    <p><strong>Servicio:</strong> ${cita.idServicio}</p>
-                    <p><strong>Precio:</strong> S/ ${cita.precio.toFixed(2)}</p>
+                    <p><strong>Hora:</strong> ${cita.horaInicio} - ${cita.horaFin}</p>
+                    <p><strong>Barbero:</strong> ${cita.barbero?.nombre || cita.idBarbero}</p>
+                    <p><strong>Servicio:</strong> ${cita.servicio?.nombreServicio || cita.idServicio}</p>
+                    <p><strong>Estado:</strong> ${cita.estado}</p>
+                </div>
+                <div class="countdown" id="countdown-${cita.idCita}" data-id="${cita.idCita}" data-fecha="${cita.fecha}T${cita.horaInicio}"></div>
+            `;
+            citasActivasContainer.appendChild(div);
+        });
+
+        // Renderizar historial
+        if (citasHistorial.length === 0) {
+            historialContainer.innerHTML = "<p>No tienes citas anteriores registradas.</p>";
+        } else {
+            citasHistorial.forEach(cita => {
+                const div = document.createElement("div");
+                div.classList.add("card");
+                div.innerHTML = `
+                    <div class="card-info">
+                        <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                        <p><strong>Hora:</strong> ${cita.horaInicio} - ${cita.horaFin}</p>
+                        <p><strong>Barbero:</strong> ${cita.barbero?.nombre || cita.idBarbero}</p>
+                        <p><strong>Servicio:</strong> ${cita.servicio?.nombreServicio || cita.idServicio}</p>
+                        <p><strong>Estado:</strong> ${cita.estado}</p>
+                    </div>
                 `;
-                contCitas.appendChild(div);
+                historialContainer.appendChild(div);
             });
-        } catch (err) {
-            console.error(err);
-            // No tocamos showToast, lo manejas desde otro JS
         }
+
+        // Inicializar contadores
+        iniciarContadores();
+    } catch (err) {
+        console.error(err);
     }
+}
+
 
     // ==========================
     // Cargar barberos y servicios

@@ -104,3 +104,13 @@ function iniciarContadores() {
     }, 1000);
   });
 }
+
+// Ejecutar al cargar la página
+document.addEventListener("DOMContentLoaded", async () => {
+    await verTodasLasCitas();
+});
+
+// Ejecutar también cuando se vuelve a la página desde otra (back/forward)
+window.addEventListener("pageshow", async () => {
+    await verTodasLasCitas();
+});
