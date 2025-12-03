@@ -125,7 +125,19 @@ function iniciarContadores() {
 // ============================
 // Ejecutar al cargar la página
 // ============================
-document.addEventListener("DOMContentLoaded", cargarCitas);
+document.addEventListener("DOMContentLoaded", () => {
+    // Si se acaba de crear una cita, actualizar inmediatamente
+    if (localStorage.getItem("actualizarCitas") === "true") {
+        cargarCitas();
+        localStorage.removeItem("actualizarCitas"); // limpiar bandera
+    } else {
+        cargarCitas();
+    }
+});
 
+// ============================
 // Ejecutar también cuando se vuelve a la página desde otra (back/forward)
-window.addEventListener("pageshow", cargarCitas);
+// ============================
+window.addEventListener("pageshow", () => {
+    cargarCitas();
+});

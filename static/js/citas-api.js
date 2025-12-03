@@ -134,6 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Confetis de éxito
                 lanzarConfeti();
 
+                // citas en localstorage
+                localStorage.setItem("actualizarCitas", "true");
+
+
                 setTimeout(() => {
                     window.location.href = 'usuario.html';
                 }, 3000);
@@ -142,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error(err);
                 showToast('Error de conexión al servidor', 'error');
             }
-            
+
         });
     }
 
