@@ -1,116 +1,131 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const usuario = JSON.parse(localStorage.getItem("usuario"));
+// ============================
+// Función principal para cargar todas las citas
+// ============================
+async function cargarCitas() {
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+    const token = localStorage.getItem("token");
 
-  const token = localStorage.getItem("token");
+    const perfilInfo = document.getElementById("perfil-info");
+    const citasActivasContainer = document.getElementById("citas-activas");
+    const historialContainer = document.getElementById("historial-citas");
 
-  const perfilInfo = document.getElementById("perfil-info");
-  if (perfilInfo) {
-    perfilInfo.innerHTML = `
-      <p><strong>Nombre:</strong> ${usuario.nombreCompleto}</p>
-      <p><strong>Correo:</strong> ${usuario.correo}</p>
-    `;
-  }
+    if (!usuario || !citasActivasContainer || !historialContainer) return;
 
-  const citasActivasContainer = document.getElementById("citas-activas");
-  const historialContainer = document.getElementById("historial-citas");
-  if (!citasActivasContainer || !historialContainer) return;
+    // Mostrar info del usuario
+    if (perfilInfo) {
+        perfilInfo.innerHTML = `
+            <p><strong>Nombre:</strong> ${usuario.nombreCompleto}</p>
+            <p><strong>Correo:</strong> ${usuario.correo}</p>
+        `;
+    }
 
-  // === 1. Obtener citas desde backend ===
-  const response = await fetch(`https://app-barberia-production.up.railway.app/api/citas/usuario/${usuario.idUsuario}`, {
-    headers: { "Authorization": `Bearer ${token}` }
-  });
-  const citas = await response.json();
-
-  // Limpiar contenedores
-  citasActivasContainer.innerHTML = "";
-  historialContainer.innerHTML = "";
-
-  // === 2. Separar por estado ===
-  const citasActivas = citas.filter(cita => cita.estado === "pendiente" || cita.estado === "confirmada");
-  const citasHistorial = citas.filter(cita => cita.estado === "completada" || cita.estado === "cancelada");
-
-  // === 3. Renderizar citas activas ===
-  citasActivas.forEach(cita => {
-    const div = document.createElement("div");
-    div.classList.add("card");
-    div.innerHTML = `
-      <div class="card-info">
-        <p><strong>Fecha:</strong> ${cita.fecha}</p>
-        <p><strong>Hora:</strong> ${cita.horaInicio} - ${cita.horaFin}</p>
-        <p><strong>Barbero:</strong> ${cita.barbero?.nombre || cita.idBarbero}</p>
-        <p><strong>Servicio:</strong> ${cita.servicio?.nombreServicio || cita.idServicio}</p>
-        <p><strong>Estado:</strong> ${cita.estado}</p>
-      </div>
-      <div class="countdown" id="countdown-${cita.idCita}" data-id="${cita.idCita}" data-fecha="${cita.fecha}T${cita.horaInicio}"></div>
-    `;
-    citasActivasContainer.appendChild(div);
-  });
-
-  // === 4. Renderizar historial ===
-  if (citasHistorial.length === 0) {
-    historialContainer.innerHTML = "<p>No tienes citas anteriores registradas.</p>";
-  } else {
-    citasHistorial.forEach(cita => {
-      const div = document.createElement("div");
-      div.classList.add("card");
-      div.innerHTML = `
-        <div class="card-info">
-          <p><strong>Fecha:</strong> ${cita.fecha}</p>
-          <p><strong>Hora:</strong> ${cita.horaInicio} - ${cita.horaFin}</p>
-          <p><strong>Barbero:</strong> ${cita.barbero?.nombre || cita.idBarbero}</p>
-          <p><strong>Servicio:</strong> ${cita.servicio?.nombreServicio || cita.idServicio}</p>
-          <p><strong>Estado:</strong> ${cita.estado}</p>
-        </div>
-      `;
-      historialContainer.appendChild(div);
-    });
-  }
-
-  // === 5. Inicializar contadores para citas activas ===
-  iniciarContadores();
-});
-
-function iniciarContadores() {
-  const contadores = document.querySelectorAll(".countdown");
-
-  contadores.forEach(contador => {
-    const fechaCita = contador.dataset.fecha;
-    const idCita = contador.dataset.id;
-    const fechaObjetivo = new Date(fechaCita).getTime();
-
-    const intervalId = setInterval(async () => {
-      const ahora = new Date().getTime();
-      const diferencia = fechaObjetivo - ahora;
-
-      if (diferencia <= 0) {
-        clearInterval(intervalId);
-        contador.textContent = "Cita finalizada";
-        contador.parentElement.remove(); 
-        // Opcional: actualizar estado en backend a completada
-        await fetch(`https://app-barberia-production.up.railway.app/api/citas/${idCita}/estado`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ estado: "completada" })
+    try {
+        // Obtener citas del backend
+        const res = await fetch(`https://app-barberia-production.up.railway.app/api/citas/usuario/${usuario.idUsuario}`, {
+            headers: { "Authorization": `Bearer ${token}` }
         });
-        return;
-      }
+        const citas = await res.json();
 
-      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-      const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
-      const segundos = Math.floor((diferencia / 1000) % 60);
+        // Limpiar contenedores
+        citasActivasContainer.innerHTML = "";
+        historialContainer.innerHTML = "";
 
-      contador.textContent = `Faltan ${dias}d ${horas}h ${minutos}m ${segundos}s`;
-    }, 1000);
-  });
+        // Separar citas por estado
+        const citasActivas = citas.filter(cita => cita.estado === "pendiente" || cita.estado === "confirmada");
+        const citasHistorial = citas.filter(cita => cita.estado === "completada" || cita.estado === "cancelada");
+
+        // Renderizar citas activas
+        citasActivas.forEach(cita => {
+            const div = document.createElement("div");
+            div.classList.add("card");
+            div.innerHTML = `
+                <div class="card-info">
+                    <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                    <p><strong>Hora:</strong> ${cita.horaInicio} - ${cita.horaFin}</p>
+                    <p><strong>Barbero:</strong> ${cita.barbero?.nombre || cita.idBarbero}</p>
+                    <p><strong>Servicio:</strong> ${cita.servicio?.nombreServicio || cita.idServicio}</p>
+                    <p><strong>Estado:</strong> ${cita.estado}</p>
+                </div>
+                <div class="countdown" id="countdown-${cita.idCita}" data-id="${cita.idCita}" data-fecha="${cita.fecha}T${cita.horaInicio}"></div>
+            `;
+            citasActivasContainer.appendChild(div);
+        });
+
+        // Renderizar historial
+        if (citasHistorial.length === 0) {
+            historialContainer.innerHTML = "<p>No tienes citas anteriores registradas.</p>";
+        } else {
+            citasHistorial.forEach(cita => {
+                const div = document.createElement("div");
+                div.classList.add("card");
+                div.innerHTML = `
+                    <div class="card-info">
+                        <p><strong>Fecha:</strong> ${cita.fecha}</p>
+                        <p><strong>Hora:</strong> ${cita.horaInicio} - ${cita.horaFin}</p>
+                        <p><strong>Barbero:</strong> ${cita.barbero?.nombre || cita.idBarbero}</p>
+                        <p><strong>Servicio:</strong> ${cita.servicio?.nombreServicio || cita.idServicio}</p>
+                        <p><strong>Estado:</strong> ${cita.estado}</p>
+                    </div>
+                `;
+                historialContainer.appendChild(div);
+            });
+        }
+
+        // Inicializar contadores
+        iniciarContadores();
+
+    } catch (err) {
+        console.error("Error cargando citas:", err);
+    }
 }
 
+// ============================
+// Inicializar contadores de citas activas
+// ============================
+function iniciarContadores() {
+    const contadores = document.querySelectorAll(".countdown");
+
+    contadores.forEach(contador => {
+        const fechaCita = contador.dataset.fecha;
+        const idCita = contador.dataset.id;
+        const fechaObjetivo = new Date(fechaCita).getTime();
+
+        const intervalId = setInterval(async () => {
+            const ahora = new Date().getTime();
+            const diferencia = fechaObjetivo - ahora;
+
+            if (diferencia <= 0) {
+                clearInterval(intervalId);
+                contador.textContent = "Cita finalizada";
+                contador.parentElement.remove();
+
+                // Actualizar estado en backend
+                try {
+                    await fetch(`https://app-barberia-production.up.railway.app/api/citas/${idCita}/estado`, {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ estado: "completada" })
+                    });
+                } catch (err) {
+                    console.error("Error actualizando estado de cita:", err);
+                }
+                return;
+            }
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+            const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
+            const segundos = Math.floor((diferencia / 1000) % 60);
+
+            contador.textContent = `Faltan ${dias}d ${horas}h ${minutos}m ${segundos}s`;
+        }, 1000);
+    });
+}
+
+// ============================
 // Ejecutar al cargar la página
-document.addEventListener("DOMContentLoaded", async () => {
-    await verTodasLasCitas();
-});
+// ============================
+document.addEventListener("DOMContentLoaded", cargarCitas);
 
 // Ejecutar también cuando se vuelve a la página desde otra (back/forward)
-window.addEventListener("pageshow", async () => {
-    await verTodasLasCitas();
-});
+window.addEventListener("pageshow", cargarCitas);
