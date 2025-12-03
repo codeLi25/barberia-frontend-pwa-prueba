@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Datos que se enviarán:', citaPayload);
 
             try {
-                const res = await fetch('http://localhost:8080/api/citas', {
+                const res = await fetch('https://app-barberia-production.up.railway.app/api/citas', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(citaPayload)
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper: cargar barberos
     async function cargarBarberos() {
         try {
-            const res = await fetch('/api/barberos');
+            const res = await fetch('https://app-barberia-production.up.railway.app/api/barberos');
             if (!res.ok) return;
             const barberos = await res.json();
 
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Helper: cargar servicios
     async function cargarServicios() {
         try {
-            const res = await fetch('http://localhost:8080/api/servicios');
+            const res = await fetch('https://app-barberia-production.up.railway.app/api/servicios');
             if (!res.ok) {
                 console.error('Error al obtener servicios:', res.status);
                 return;

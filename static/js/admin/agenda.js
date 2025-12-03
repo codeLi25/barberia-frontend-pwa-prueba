@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // ==================== Cargar barberos ====================
     async function cargarBarberos() {
         try {
-            const res = await fetch("http://localhost:8080/api/barberos");
+            const res = await fetch("https://app-barberia-production.up.railway.app/api/barberos");
             const barberos = await res.json();
             barberoFilter.innerHTML = `<option value="todos">Todos</option>`;
             barberos.forEach(b => {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // ==================== Cargar servicios ====================
     async function cargarServicios() {
         try {
-            const res = await fetch("http://localhost:8080/api/servicios");
+            const res = await fetch("https://app-barberia-production.up.railway.app/api/servicios");
             const servicios = await res.json();
             servicioFilter.innerHTML = `<option value="todos">Todos</option>`;
             servicios.forEach(s => {
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // ==================== Cargar citas ====================
     async function cargarCitas() {
         try {
-            const res = await fetch("http://localhost:8080/api/citas");
+            const res = await fetch("https://app-barberia-production.up.railway.app/api/citas");
             const citas = await res.json();
             agendaBody.innerHTML = "";
 
@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (e.target.closest(".finalizar-btn")) {
             if (!confirm("¿Seguro que deseas marcar esta cita como completada?")) return;
             try {
-                const res = await fetch(`http://localhost:8080/api/citas/${idCita}/estado`, {
+                const res = await fetch(`https://app-barberia-production.up.railway.app/api/citas/${idCita}/estado`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ estado: "completada" })
@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (e.target.closest(".cancelar-btn")) {
             if (!confirm("¿Seguro que deseas cancelar esta cita?")) return;
             try {
-                const res = await fetch(`http://localhost:8080/api/citas/${idCita}/estado`, {
+                const res = await fetch(`https://app-barberia-production.up.railway.app/api/citas/${idCita}/estado`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ estado: "cancelada" })

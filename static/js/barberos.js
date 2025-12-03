@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // Cambié la URL al endpoint correcto
-    const response = await fetch("/api/barberos");
+    const response = await fetch("https://app-barberia-production.up.railway.app/api/barberos");
     if (!response.ok) throw new Error("Error al cargar barberos");
     const barberos = await response.json();
 

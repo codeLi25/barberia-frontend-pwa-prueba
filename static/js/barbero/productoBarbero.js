@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const sugMobile = document.querySelector(".mobile-search .dropdown-sugerencias");
   const sugDesktop = document.querySelector(".desktop-search .dropdown-sugerencias");
 
-  const API_URL = "http://localhost:8080/api/solicitud-productos";
+  const API_URL = "https://app-barberia-production.up.railway.app/api/solicitud-productos";
   let productos = [];
   let productosFiltrados = [];
   let paginaActual = 1;

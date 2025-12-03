@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //  1. Cargar usuarios desde el backend
     async function cargarUsuarios() {
         try {
-            const response = await fetch("/api/usuarios/listar");
+            const response = await fetch("https://app-barberia-production.up.railway.app/api/usuarios/listar");
             if (!response.ok) throw new Error("Error al obtener usuarios");
 
             const usuarios = await response.json();
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("file", file);
 
         try {
-            const res = await fetch("/api/barbero-login/upload", {
+            const res = await fetch("https://app-barberia-production.up.railway.app/api/barbero-login/upload", {
                 method: "POST",
                 body: formData,
             });
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             //  1. Actualizar el rol del usuario
             const body = { rol: nuevoRol, foto, descripcion };
-            const response = await fetch(`/api/usuarios/${usuarioSeleccionado}/rol`, {
+            const response = await fetch(`https://app-barberia-production.up.railway.app/api/usuarios/${usuarioSeleccionado}/rol`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body),
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 2. Si es barbero, registrar también en la tabla de barberos
             if (nuevoRol === "barbero") {
-                const registroResp = await fetch("/api/barbero-login/registrar", {
+                const registroResp = await fetch("https://app-barberia-production.up.railway.app/api/barbero-login/registrar", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //  8. Cargar datos del barbero
     async function cargarDatosBarbero(idUsuario) {
         try {
-            const resp = await fetch(`/api/barbero-login/usuario/${idUsuario}`);
+            const resp = await fetch(`https://app-barberia-production.up.railway.app/api/barbero-login/usuario/${idUsuario}`);
             if (!resp.ok) return;
             const data = await resp.json();
             inputDescripcion.value = data.descripcion || "";
@@ -227,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //  9. Eliminar usuario
     async function eliminarUsuario(id) {
         try {
-            const response = await fetch(`/api/usuarios/eliminar/${id}`, {
+            const response = await fetch(`https://app-barberia-production.up.railway.app/api/usuarios/eliminar/${id}`, {
                 method: "DELETE",
             });
             if (!response.ok) throw new Error("Error al eliminar usuario");

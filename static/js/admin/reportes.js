@@ -6,7 +6,7 @@ let chart;
 // ============================
 async function renderGrafico(tipo) {
     try {
-        const res = await fetch(`/api/reportes?tipo=${tipo}`);
+        const res = await fetch(`https://app-barberia-production.up.railway.app/api/reportes?tipo=${tipo}`);
 
         if (!res.ok) {
             const errorText = await res.text();

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const API_PRODUCTOS = "http://localhost:8080/api/productos";
-    const API_PRODUCTOS_BARBERO = "http://localhost:8080/api/solicitud-productos";
+    const API_PRODUCTOS = "https://app-barberia-production.up.railway.app/api/productos";
+    const API_PRODUCTOS_BARBERO = "https://app-barberia-production.up.railway.app/api/solicitud-productos";
 
     // ===== TOAST GLOBAL =====
     function showToast(message, type = 'info', duration = 3000) {

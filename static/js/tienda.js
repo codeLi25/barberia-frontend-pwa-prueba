@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const filtroBtns = document.querySelectorAll(".filtroProductos-btn");
   const paginacionEl = document.getElementById("productos-paginacion");
 
-  const API_URL = "http://localhost:8080/api/productos";
+  const API_URL = "https://app-barberia-production.up.railway.app/api/productos";
 
   let productos = [];
   let productosFiltrados = [];

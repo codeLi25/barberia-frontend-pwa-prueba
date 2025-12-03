@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Cargar datos del backend
   if (idUsuario) {
     try {
-      const res = await fetch(`http://localhost:8080/api/usuarios/${idUsuario}`);
+      const res = await fetch(`https://app-barberia-production.up.railway.app/api/usuarios/${idUsuario}`);
       if (!res.ok) throw new Error("Error al obtener usuario");
       usuario = await res.json();
 
@@ -222,7 +222,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
     try {
-      const res = await fetch("http://localhost:8080/api/ventas", {
+      const res = await fetch("https://app-barberia-production.up.railway.app/api/ventas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(venta),

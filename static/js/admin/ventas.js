@@ -1,4 +1,4 @@
-const API_VENTAS = "http://localhost:8080/api/ventas";
+const API_VENTAS = "https://app-barberia-production.up.railway.app/api/ventas";
 let ventasGlobal = [];
 
 document.addEventListener("DOMContentLoaded", () => {

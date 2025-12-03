@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!citasActivasContainer || !historialContainer) return;
 
   // === 1. Obtener citas desde backend ===
-  const response = await fetch(`http://localhost:8080/api/citas/usuario/${usuario.idUsuario}`, {
+  const response = await fetch(`https://app-barberia-production.up.railway.app/api/citas/usuario/${usuario.idUsuario}`, {
     headers: { "Authorization": `Bearer ${token}` }
   });
   const citas = await response.json();
@@ -87,7 +87,7 @@ function iniciarContadores() {
         contador.textContent = "Cita finalizada";
         contador.parentElement.remove(); 
         // Opcional: actualizar estado en backend a completada
-        await fetch(`http://localhost:8080/api/citas/${idCita}/estado`, {
+        await fetch(`https://app-barberia-production.up.railway.app/api/citas/${idCita}/estado`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ estado: "completada" })

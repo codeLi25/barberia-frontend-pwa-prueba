@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!usuario || usuario.rol !== "barbero") return;
 
       // Obtener todas las citas del barbero
-      const response = await fetch(`/api/barbero/${usuario.idUsuario}`);
+      const response = await fetch(`https://app-barberia-production.up.railway.app/api/barbero/${usuario.idUsuario}`);
       if (!response.ok) throw new Error("Error al obtener citas");
 
       const citas = await response.json();
@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const resPrecio = await fetch(`/api/citas/${cita.idCita}/precio`, {
+      const resPrecio = await fetch(`https://app-barberia-production.up.railway.app/api/citas/${cita.idCita}/precio`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ precio: precioValor })
@@ -402,7 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           }
 
-          const resEstado = await fetch(`/api/citas/${cita.idCita}/estado`, {
+          const resEstado = await fetch(`https://app-barberia-production.up.railway.app/api/citas/${cita.idCita}/estado`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ estado: "completada" })
@@ -430,7 +430,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // ===== CANCELAR =====
       btnNo.onclick = async () => {
         try {
-          const res = await fetch(`/api/citas/${cita.idCita}/estado`, {
+          const res = await fetch(`https://app-barberia-production.up.railway.app/api/citas/${cita.idCita}/estado`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ estado: "cancelada" })

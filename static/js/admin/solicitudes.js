@@ -1,5 +1,5 @@
-const API = "http://localhost:8080/api/solicitudes";
-const API_BARBEROS = "http://localhost:8080/api/barberos";
+const API = "https://app-barberia-production.up.railway.app/api/solicitudes";
+const API_BARBEROS = "https://app-barberia-production.up.railway.app/api/barberos";
 
 const tipoBtns = document.querySelectorAll(".solicitud-btn");
 const solicitudesBody = document.getElementById("solicitudes-body");

@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const detalleFecha = document.getElementById("detalleFechaSolicitud");
     const detalleProductos = document.getElementById("detalleProductosSolicitud");
 
-    const API_URL = "http://localhost:8080/api";
+    const API_URL = "https://app-barberia-production.up.railway.app/api";
 
     //  Función para convertir fecha a formato local
     function convertirFechaLocal(fechaStr) {

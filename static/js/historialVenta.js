@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Cargar compras siempre (no solo si viene desde compra)
     try {
-        const res = await fetch(`http://localhost:8080/api/ventas/usuario/${usuario.idUsuario}`);
+        const res = await fetch(`https://app-barberia-production.up.railway.app/api/ventas/usuario/${usuario.idUsuario}`);
         if (!res.ok) throw new Error("Error al obtener compras");
 
         const compras = await res.json();

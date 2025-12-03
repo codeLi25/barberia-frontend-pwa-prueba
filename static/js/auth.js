@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const usuario = { nombreCompleto, dni, telefono, correo, username, contrasena };
 
             try {
-                const response = await fetch("/api/usuarios/registrar", {
+                const response = await fetch("https://app-barberia-production.up.railway.app/api/usuarios/registrar", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(usuario),
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const loginData = { username, contrasena };
 
             try {
-                const response = await fetch("/api/usuarios/login", {
+                const response = await fetch("https://app-barberia-production.up.railway.app/api/usuarios/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(loginData),
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 //  Si el usuario es barbero, obtener sus datos desde el endpoint exclusivo
                 if (usuario.rol === "barbero") {
                     try {
-                        const resBarbero = await fetch(`http://localhost:8080/api/barbero-login/usuario/${usuario.idUsuario}`);
+                        const resBarbero = await fetch(`https://app-barberia-production.up.railway.app/api/barbero-login/usuario/${usuario.idUsuario}`);
                         if (resBarbero.ok) {
                             const barbero = await resBarbero.json();
                             localStorage.setItem("idBarbero", barbero.idBarbero);
