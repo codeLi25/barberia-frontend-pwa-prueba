@@ -26,7 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (contrasena.length < 6) { showToast("La contraseña debe tener al menos 6 caracteres", "error"); return; }
             if (contrasena !== confirmar) { showToast("Las contraseñas no coinciden", "error"); return; }
 
-            const usuario = { nombreCompleto, dni, telefono, correo, username, contrasena };
+            const usuario = {
+                nombreCompleto,
+                dni,
+                telefono,
+                correo,
+                username,
+                contrasena,
+                idRol: 1  // ROL CLIENTE POR DEFECTO
+            };
 
             try {
                 const response = await fetch("https://app-barberia-production.up.railway.app/api/usuarios/registrar", {
@@ -40,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     setTimeout(() => (window.location.href = "login.html"), 1200);
                 } else {
                     let data = {};
-                    try { data = await response.json(); } catch {}
+                    try { data = await response.json(); } catch { }
                     showToast(data.message || "Error al registrar usuario", "error");
                 }
             } catch (error) {
@@ -70,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (!response.ok) {
                     let data = {};
-                    try { data = await response.json(); } catch {}
+                    try { data = await response.json(); } catch { }
                     showToast(data.message || "Usuario o contraseña incorrectos", "error");
                     return;
                 }
