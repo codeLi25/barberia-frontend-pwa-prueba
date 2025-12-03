@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //  Función para lanzar confetis en toda la pantalla
     function lanzarConfeti() {
-        const duration = 2 * 1000; 
+        const duration = 2 * 1000;
         const animationEnd = Date.now() + duration;
         const defaults = {
             startVelocity: 30,
@@ -177,14 +177,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Confetis de éxito
                 lanzarConfeti();
 
-                setTimeout(() => {
-                    window.location.href = 'usuario.html';
-                }, 3000);
+                // **Ya no redirigimos a usuario.html**
+                // Solo podemos opcionalmente limpiar el formulario o actualizar la UI
+                formCita.reset();
 
             } catch (err) {
                 console.error(err);
                 showToast('Error de conexión al servidor', 'error');
             }
+
         });
     }
 
